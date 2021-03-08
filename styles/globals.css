@@ -1,0 +1,192 @@
+/* ./styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}
+
+body {
+  @apply mx-10 my-2 print:m-0;
+}
+
+.no-print {
+  @apply print:hidden;
+}
+
+.form-row {
+  @apply flex justify-between;
+}
+
+.form-row label {
+  @apply font-bold;
+}
+
+.form-row input[type="number"] {
+  @apply border-2 border-black rounded text-right;
+}
+
+.front {
+  @apply
+    grid
+    grid-cols-12
+    gap-1
+  ;
+}
+
+.front .left {
+  @apply col-span-5 flex flex-col;
+}
+
+.front .right {
+  @apply col-span-7;
+}
+
+.box {
+  @apply
+    border-2
+    border-black
+    p-1
+    mb-1
+  ;
+}
+
+.title {
+  @apply
+    text-3xl
+    flex
+    justify-between
+  ;
+}
+
+.entry-line {
+  min-width: 50%;
+  @apply
+    border-b-2
+    border-black
+    border-dotted
+    text-sm
+  ;
+}
+
+.stat-line {
+  @apply
+    gap-1
+    my-1
+  ;
+}
+
+.stat {
+  @apply
+    text-xs
+
+    border-2
+    border-black
+
+    /*h-10 w-16*/
+    h-8
+    px-1
+  ;
+}
+
+.stat.abbrivate {
+  @apply
+    text-lg
+    px-1
+  ;
+}
+
+.soldier {
+}
+
+.soldier .line {
+  @apply
+    grid
+    grid-cols-2
+    gap-2
+  ;
+}
+
+.free-form {
+  @apply text-sm;
+}
+
+.free-form.items {
+  @apply h-20;
+}
+
+.free-form.tricks-of-the-trade {
+  @apply h-20;
+}
+
+.free-form.injuries {
+  @apply h-12;
+}
+
+.back {
+  @apply grid grid-cols-12 gap-1;
+}
+
+.back .left {
+  @apply col-span-3;
+}
+
+.back .right {
+  @apply col-span-9 grid grid-cols-2 gap-1;
+}
+
+.base {
+  @apply h-40;
+}
+
+.vault {
+  @apply h-32;
+}
+
+.grimoires {
+  @apply h-60;
+}
+
+.scrolls {
+  @apply h-48;
+}
+
+.potions {
+  @apply h-36;
+}
+
+.treasury {
+  @apply h-16;
+}
+
+.school {
+  @apply
+    grid
+    grid-cols-2
+    gap-1
+    w-full
+    m-0
+    pt-0
+  ;
+}
+
+.school .header {
+  @apply
+    col-span-2
+
+    text-center
+  ;
+}
+
+.spell-name {
+  @apply font-bold text-xs;
+}
+
+.spell .entry-line {
+  @apply text-xs;
+}
+
+.notes {
+  @apply col-span-2;
+}
