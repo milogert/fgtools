@@ -1,0 +1,9 @@
+.soldier {
+  .line {
+    @apply
+      grid
+      grid-cols-2
+      gap-2
+    ;
+  }
+}

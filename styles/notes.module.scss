@@ -1,0 +1,33 @@
+.notes {
+  &.right {
+    @apply w-full;
+
+    &.base {
+      @apply h-40;
+    }
+
+    &.vault {
+      @apply h-32;
+    }
+
+    &.grimoires {
+      @apply h-60;
+    }
+
+    &.scrolls {
+      @apply h-48;
+    }
+
+    &.potions {
+      @apply h-36;
+    }
+
+    &.treasury {
+      @apply h-16;
+    }
+  }
+
+  &.bottom {
+    @apply h-28 mb-0;
+  }
+}

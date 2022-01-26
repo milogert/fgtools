@@ -1,6 +1,12 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
+  content: [
+    './components/**/*.{js,jsx}',
+    './pages/**/*.{js,jsx}',
+  ],
   theme: {
     extend: {
       screens: {
@@ -9,7 +15,11 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    // extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss'),
+    require('precss'),
+    require('autoprefixer'),
+  ],
 }

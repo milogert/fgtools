@@ -1,0 +1,40 @@
+.header {
+  @apply text-4xl;
+}
+
+.figures {
+  @apply grid grid-cols-12 gap-1;
+
+  .left {
+    @apply col-span-5 flex flex-col;
+  }
+
+  .right {
+    @apply col-span-7;
+  }
+}
+
+.spellsAndNotes {
+  @apply grid grid-cols-12 gap-1;
+
+  .left {
+    @apply col-span-9 grid grid-cols-2 gap-1;
+  }
+
+  .right {
+    @apply col-span-3;
+  }
+
+  .top {
+    @apply col-span-12 grid grid-cols-2 gap-1;
+  }
+
+  &.bottom {
+    @apply col-span-12 grid grid-cols-2 gap-1 mt-1;
+  }
+
+}
+
+.notes {
+  @apply flex-grow;
+}

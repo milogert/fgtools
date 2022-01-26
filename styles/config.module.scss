@@ -1,0 +1,11 @@
+.config {
+  @apply mb-4;
+
+  .expansionOption {
+    @apply ml-4;
+  }
+
+  .printNotifier {
+    @apply text-3xl text-center border-black border-b-4;
+  }
+}

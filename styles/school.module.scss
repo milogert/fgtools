@@ -1,0 +1,40 @@
+.school {
+  @apply
+    grid
+    grid-cols-2
+    grid-flow-row-dense
+    gap-1
+    w-full
+    m-0
+    pt-0
+  ;
+
+  .header {
+    @apply
+      text-xl
+      col-span-2
+      text-center
+      h-8
+    ;
+  }
+
+  .spell {
+    max-height: 3rem;
+    @apply
+      flex
+      items-center
+      border-b-2
+      border-black
+      border-dotted
+      /* h-6 */
+    ;
+
+    .name {
+      @apply
+        font-bold
+        text-sm
+        w-28
+      ;
+    }
+  }
+}

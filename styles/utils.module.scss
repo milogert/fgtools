@@ -1,0 +1,78 @@
+.box {
+  @apply
+    border-2
+    border-black
+    p-1
+    mb-1
+  ;
+
+  .title {
+    @apply
+      text-3xl
+      flex
+      justify-between
+    ;
+  }
+}
+
+.entryLine {
+  min-width: 50%;
+  @apply
+    border-b-2
+    border-black
+    border-dotted
+    text-lg
+  ;
+}
+
+.formRow {
+  @apply flex justify-between items-center h-9;
+
+  &--area {
+    @apply flex flex-col items-start;
+
+    textarea {
+      @apply border-2 border-black rounded p-1 w-full;
+    }
+  }
+
+  label {
+    @apply font-bold;
+  }
+
+  input[type="number"] {
+    @apply border-2 border-black rounded text-right p-1;
+  }
+
+  .formSpacer {
+    @apply
+      flex-grow
+
+      mx-3
+
+      border-b-2
+      border-dotted
+      border-black
+    ;
+  }
+}
+
+.freeForm {
+  &.items {
+    @apply h-24;
+  }
+
+  &.tricksOfTheTrade {
+    @apply h-24;
+  }
+
+  &.injuries {
+    @apply h-16;
+  }
+}
+
+.noPrint {
+  @apply print:hidden;
+}
+
+
