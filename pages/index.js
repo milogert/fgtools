@@ -28,7 +28,7 @@ const HomePage = () => {
     },
   })
 
-  const [ hasCaptain, setHasCaptain ] = useState(true)
+  const [ hasCaptain, setHasCaptain ] = useState(false)
   const [ soldierCount, setSoldierCount ] = useState(9)
   const [ allowCustomSchools, setAllowCustomSchools ] = useState(false)
   const [ customSchoolsText, setCustomSchoolsText ] = useState(null)
