@@ -1,29 +1,21 @@
-const classnames = require('classnames')
-
-const cls = require('../styles/apprentice.module.scss')
-const clsUtils = require('../styles/utils.module.scss')
-
 const Stat = require('./Stat')
 const StatLine = require('./StatLine')
 
-const Apprentice = () => {
-  const className = classnames([ cls.apprentice, clsUtils.box ])
-
-  return <div className={className}>
-    <div className={clsUtils.title}>
+const Apprentice = () =>
+  <div className="apprentice box">
+    <div className="title">
       Apprentice
       <Stat stat="Wounds" />
     </div>
-    <div className={clsUtils.entryLine}>Name</div>
+    <div className="entryLine">Name</div>
     <StatLine />
-    <div className={`${clsUtils.freeForm} ${clsUtils.items}`}>
+    <div className="freeForm items">
       Items
     </div>
 
-    <div className={`${clsUtils.freeForm} ${clsUtils.injuries}`}>
+    <div className="freeForm injuries">
       Injuries
     </div>
   </div>
-}
 
 module.exports = Apprentice

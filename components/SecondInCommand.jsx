@@ -1,15 +1,8 @@
-const { default: classNames } = require('classnames')
-
 const Stat = require('./Stat')
 const StatLine = require('./StatLine')
 
-const cls = require('../styles/secondInCommand.module.scss')
-const clsUtils = require('../styles/utils.module.scss')
-
-const SecondInCommand = () => {
-  const className = classNames([ clsUtils.box, cls.secondInCommand ])
-
-  return <div className={className}>
+const SecondInCommand = () =>
+  <div className="second-in-command box">
     <div className={clsUtils.title}>
       2nd In Command
       <Stat stat="Wounds" />
@@ -24,6 +17,5 @@ const SecondInCommand = () => {
       Injuries
     </div>
   </div>
-}
 
 module.exports = SecondInCommand

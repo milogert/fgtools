@@ -1,20 +1,12 @@
-import classNames from 'classnames'
-
-const cls = require('../styles/school.module.scss')
-const clsUtils = require('../styles/utils.module.scss')
-
-const School = ({ name, spells }) => {
-  const className = classNames([ cls.school, clsUtils.box ])
-
-  return <div className={className}>
-    <div className={cls.header}>{name}</div>
+const School = ({ name, spells }) =>
+  <div className="box school grid grid-cols-2 grid-flow-row-dense gap-1 w-full m-0 pt-0">
+    <div className="school-header text-xl col-span-2 text-center h-8">{name}</div>
     {spells
       .sort()
-      .map(spell => <div key={spell} className={cls.spell}>
-        <div className={cls.name}>{spell}</div>
+      .map(spell => <div key={spell} className="school-spell flex items-center border-b-2 border-black border-dotted">
+        <div className="font-bold text-sm w-28">{spell}</div>
       </div>)
     }
   </div>
-}
 
 module.exports = School

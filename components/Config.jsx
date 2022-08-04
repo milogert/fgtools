@@ -1,16 +1,12 @@
-const { default: classNames } = require('classnames')
-const cls = require('../styles/config.module.scss')
-const clsUtils = require('../styles/utils.module.scss')
-
 const FormRow = ({
   className,
   inputProps,
   name,
   label,
 }) => {
-  return <div className={`${clsUtils.formRow} ${className || ''}`}>
+  return <div className={`formRow ${className || ''}`}>
     <label htmlFor={name}>{label}</label>
-    <div className={clsUtils.formSpacer}></div>
+    <div className="formSpacer"></div>
     <input
       id={name}
       {...inputProps}
@@ -27,9 +23,8 @@ const Config = props => {
     customSchoolsText,
   } = props
 
-  const className = classNames([ cls.config, clsUtils.noPrint ])
-  return <div className={className}>
-    <div className="text-2xl">General Options</div>
+  return <div className="config mb-4 noPrint">
+    <h2 className="text-2xl">General Options</h2>
     <FormRow
       name="captain"
       label="Captain?"
@@ -50,7 +45,7 @@ const Config = props => {
       }}
     />
 
-    <div className="text-2xl">Expansions</div>
+    <h2 className="text-2xl">Expansions</h2>
     {Object.keys(expansions.get).sort().map(key => {
       const expConfig = expansions.get[key]
 
@@ -74,7 +69,7 @@ const Config = props => {
           <FormRow
             name="vampireWizard"
             label="Make wizard a vampire?"
-            className={cls.expansionOption}
+            className="expansion-option ml-4"
             inputProps={{
               type: "checkbox",
               onChange: () => onChange('vampireWizard'),
@@ -85,10 +80,10 @@ const Config = props => {
       </div>
     })}
 
-    <div className="text-2xl">Custom</div>
-    <div className={clsUtils.formRow}>
+    <h2 className="text-2xl">Custom</h2>
+    <div className="formRow">
       <label htmlFor="allowCustomSchools">Configure custom schools of magic?</label>
-      <div className={clsUtils.formSpacer}></div>
+      <div className="formSpacer"></div>
       <input
         id="allowCustomSchools"
         type="checkbox"
@@ -97,7 +92,7 @@ const Config = props => {
       />
     </div>
     {allowCustomSchools.get &&
-      <div className={clsUtils['formRow--area']}>
+      <div className="formRow--area">
         <label htmlFor="customSchools">Custom Magic Schools</label>
         <textarea
           id="customSchools"
@@ -107,7 +102,7 @@ const Config = props => {
         ></textarea>
       </div>
     }
-    <div className={cls.printNotifier}>Everything above this line will not be printed</div>
+    <div className="text-3xl text-center border-black border-b-4">Everything above this line will not be printed</div>
   </div>
 }
 

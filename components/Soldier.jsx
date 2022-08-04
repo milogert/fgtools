@@ -1,24 +1,16 @@
-const { default: classNames } = require('classnames')
-
 const StatLine = require('./StatLine')
 
-const cls = require('../styles/soldier.module.scss')
-const clsUtils = require('../styles/utils.module.scss')
-
-const Soldier = () => {
-  const className = classNames([ clsUtils.box, cls.soldier ])
-
-  return <div className={className}>
-    <div className={cls.line}>
-      <div className={clsUtils.entryLine}>Name</div>
-      <div className={clsUtils.entryLine}>Type</div>
+const Soldier = () =>
+  <div className="soldier box">
+    <div className="soldier-top grid grid-cols-2 gap-2">
+      <div className="entryLine">Name</div>
+      <div className="entryLine">Type</div>
     </div>
     <StatLine />
-    <div className={cls.line}>
-      <div className={clsUtils.entryLine}>Equipment</div>
-      <div className={clsUtils.entryLine}>Item</div>
+    <div className="soldier-bottom grid grid-cols-2 gap-2">
+      <div className="entryLine">Equipment</div>
+      <div className="entryLine">Item</div>
     </div>
   </div>
-}
 
 module.exports = Soldier
