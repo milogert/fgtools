@@ -1,3 +1,4 @@
+const classnames = require('classnames')
 const { assocPath, compose } = require('ramda')
 const { useState, useEffect } = require('react')
 
@@ -17,16 +18,18 @@ const HomePage = () => {
   const [ expansions, setExpansions ] = useState({
     bloodLegacy: {
       label: "Blood Legacy",
-      enabled: true,
+      enabled: false,
       vampireWizard: false,
     },
     intoTheBreedingPits: {
       label: "Into the Breeding Pits",
-      enabled: true,
+      enabled: false,
     },
   })
 
+  const [ showPreview, setShowPreview ] = useState(true)
   const [ hasCaptain, setHasCaptain ] = useState(false)
+  const [ thickBorders, setThickBorders ] = useState(false)
   const [ soldierCount, setSoldierCount ] = useState(9)
   const [ allowCustomSchools, setAllowCustomSchools ] = useState(false)
   const [ customSchoolsText, setCustomSchoolsText ] = useState(null)
@@ -52,75 +55,125 @@ const HomePage = () => {
   const schoolCount = schools.length
 
   return <>
-    <h1 className={`noPrint text-4xl`}>Frostgrave Character Sheet</h1>
+    <div className="flex justify-between items-center">
+      <h1 className={`print:hidden text-4xl`}>Frostgrave Character Sheet</h1>
+      <div>Find a bug? <a className="underline text-blue-500" href="https://github.com/milogert/frostgrave-sheet/issues/new">File it here!</a></div>
+    </div>
 
     <Config
-      expansions={{ get: expansions, set: setExpansions }}
-      hasCaptain={{ get: hasCaptain, set: setHasCaptain }}
-      soldierCount={{ get: soldierCount, set: setSoldierCount }}
       allowCustomSchools={{ get: allowCustomSchools, set: setAllowCustomSchools }}
       customSchoolsText={{ get: customSchoolsText, set: setCustomSchoolsText }}
+      expansions={{ get: expansions, set: setExpansions }}
+      hasCaptain={{ get: hasCaptain, set: setHasCaptain }}
+      showPreview={{ get: showPreview, set: setShowPreview }}
+      soldierCount={{ get: soldierCount, set: setSoldierCount }}
+      thickBorders={{ get: thickBorders, set: setThickBorders }}
     />
 
-    <div className="figures grid grid-cols-12 gap-1">
-      <div className="figures-main col-span-5 flex flex-col">
-        <Wizard />
-        { expansions.bloodLegacy.vampireWizard ? <SecondInCommand /> : <Apprentice />}
-        { hasCaptain
-          ? <Captain />
-          : <div className={`box flex-grow`}>Notes</div>
-        }
-      </div>
-      <div className="figures-soldiers col-span-7">
-        {
-          Array(Math.min(soldierCount, 9)).fill().map((_, idx) => <Soldier key={idx} />)
-        }
-      </div>
-    </div>
-
-    <PageBreak />
-
-    { soldierCount > 9 && <>
-      <div className="figures grid grid-cols-12 gap-1">
-        <div className="figures-notes col-span-5 flex flex-col">
-          <div className={`box flex-grow`}>Notes</div>
+    {showPreview && <>
+      <div className="figures printing print:m-auto grid grid-cols-12 gap-1">
+        <div className="figures-main col-span-5 flex flex-col">
+          <Wizard thickBorders={thickBorders} />
+          { expansions.bloodLegacy.vampireWizard
+            ? <SecondInCommand thickBorders={thickBorders} />
+            : <Apprentice thickBorders={thickBorders} />
+          }
+          { hasCaptain
+            ? <Captain thickBorders={thickBorders} />
+            : <div className={classnames(
+                'box flex-grow',
+                { 'border': !thickBorders, 'border-2': thickBorders}
+              )}>Notes</div>
+          }
         </div>
-        <div className="figures-soldiers col-span-7">
+        <div className="figures-soldiers col-span-7 flex flex-col">
           {
-            Array(soldierCount - 9).fill().map((_, idx) => <Soldier key={idx} />)
+            Array(Math.min(soldierCount, 9))
+              .fill()
+              .map((_, idx) =>
+                <Soldier key={idx} thickBorders={thickBorders} />
+              )
           }
         </div>
       </div>
-      <PageBreak />
-    </>}
 
-    <div className="spells grid grid-cols-12 gap-1">
-      <div
-        className={`spells-schools grid grid-cols-2 gap-1 ${schoolCount > 10 ? "col-span-12" : "col-span-9"}`}
-      >
-        {schools
-          .slice(0, 10)
-          .map(name => <School key={name} name={name} spells={allSchools[name]} />)
-        }
-      </div>
-      {schoolCount <= 10 && <div className="spells-notes col-span-3"><Notes onRight /></div>}
-    </div>
-
-    {schoolCount > 10 && <>
       <PageBreak />
-      <div className="spells-schools grid grid-cols-12 gap-1">
-        <div className="schools-overflow col-span-12 grid grid-cols-2 gap-1">
-          {schools
-            .slice(10, schoolCount)
-            .map(name => <School key={name} name={name} spells={allSchools[name]} />)
-          }
+
+      { soldierCount > 9 && <>
+        <div className="figures printing print:m-auto grid grid-cols-12 gap-1">
+          <div className="figures-notes col-span-5 flex flex-col">
+            <div className={classnames(
+              'box flex-grow',
+              { 'border': !thickBorders, 'border-2': thickBorders}
+            )}>Notes</div>
+          </div>
+          <div className="figures-soldiers col-span-7">
+            {
+              Array(soldierCount - 9)
+                .fill()
+                .map((_, idx) =>
+                  <Soldier key={idx} thickBorders={thickBorders} />
+                )
+            }
+          </div>
         </div>
-      </div>
-    </>}
 
-    {schoolCount > 10 && <div className="notes-bottom grid grid-cols-2 gap-1 mt-1">
-      <Notes onBottom />
-    </div>}
+        <PageBreak />
+      </>}
+
+      {schools.length <= 10 &&
+        <div className="flex flex-col printing print:m-auto">
+          <div className="schools-overflow grid grid-cols-2 gap-1">
+            {schools
+              .map(name => <School
+                key={name}
+                name={name}
+                spells={allSchools[name]}
+                thickBorders={thickBorders}
+              />)
+            }
+          </div>
+
+          <Notes thickBorders={thickBorders} />
+        </div>
+      }
+
+      {schools.length > 10 && <>
+        <div className="flex flex-col printing print:m-auto">
+          <div className="schools-overflow grid grid-cols-2 gap-1">
+            {schools
+              .slice(0, 10)
+              .map(name => <School
+                key={name}
+                name={name}
+                spells={allSchools[name]}
+                thickBorders={thickBorders}
+              />)
+            }
+          </div>
+
+          <Notes thickBorders={thickBorders} />
+        </div>
+
+        <PageBreak />
+
+        <div className="flex flex-col printing print:m-auto">
+          <div className="schools-overflow grid grid-cols-2 gap-1">
+            {schools
+              .slice(10, schools.length)
+              .map(name => <School
+                key={name}
+                name={name}
+                spells={allSchools[name]}
+                thickBorders={thickBorders}
+              />)
+            }
+          </div>
+
+          <Notes thickBorders={thickBorders} />
+        </div>
+      </>}
+    </>}
   </>
 }
 

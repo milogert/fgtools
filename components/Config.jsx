@@ -16,15 +16,26 @@ const FormRow = ({
 
 const Config = props => {
   const {
-    expansions,
-    hasCaptain,
-    soldierCount,
     allowCustomSchools,
     customSchoolsText,
+    expansions,
+    hasCaptain,
+    showPreview,
+    soldierCount,
+    thickBorders,
   } = props
 
-  return <div className="config mb-4 noPrint">
-    <h2 className="text-2xl">General Options</h2>
+  return <div className="config mb-4 print:hidden">
+    <h2 className="text-2xl mt-4">General Options</h2>
+    <FormRow
+      name="showPreview"
+      label="Show Preview?"
+      inputProps={{
+        type: "checkbox",
+        onChange: () => showPreview.set(!showPreview.get),
+        checked: showPreview.get,
+      }}
+    />
     <FormRow
       name="captain"
       label="Captain?"
@@ -44,8 +55,17 @@ const Config = props => {
         value: soldierCount.get,
       }}
     />
+    <FormRow
+      name="thickBorders"
+      label="Thick Borders"
+      inputProps={{
+        type: "checkbox",
+        onChange: () => thickBorders.set(!thickBorders.get),
+        checked: thickBorders.get,
+      }}
+    />
 
-    <h2 className="text-2xl">Expansions</h2>
+    <h2 className="text-2xl mt-4">Expansions</h2>
     {Object.keys(expansions.get).sort().map(key => {
       const expConfig = expansions.get[key]
 
@@ -80,7 +100,7 @@ const Config = props => {
       </div>
     })}
 
-    <h2 className="text-2xl">Custom</h2>
+    <h2 className="text-2xl mt-4">Custom</h2>
     <div className="formRow">
       <label htmlFor="allowCustomSchools">Configure custom schools of magic?</label>
       <div className="formSpacer"></div>
@@ -102,7 +122,13 @@ const Config = props => {
         ></textarea>
       </div>
     }
-    <div className="text-3xl text-center border-black border-b-4">Everything above this line will not be printed</div>
+
+    {showPreview.get &&
+      <div className="text-3xl text-center border-black border-b-4 mt-4">
+        <div>Everything above this line will not be printed</div>
+        <div>Below is a preview of your wizard sheet</div>
+      </div>
+    }
   </div>
 }
 

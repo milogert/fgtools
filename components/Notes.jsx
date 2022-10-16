@@ -1,35 +1,29 @@
-const titleCase = str => {
-  const split = str.split('')
-  split[0] = split[0].toUpperCase()
-  return split.join('')
-}
+const classnames = require('classnames')
 
 const NotesBox = ({ className, name }) =>
-  <div key={name} className={className}>{titleCase(name)}</div>
+  <div className={`${className} mb-1 last:mb-0 h-28 print:h-auto`}>{name}</div>
 
-const NOTES = {
-  'base': { className: 'h-40' },
-  'vault': { className: 'h-32' },
-  'grimoires': { className: 'h-60' },
-  'scrolls': { className: 'h-48' },
-  'potions': { className: 'h-36' },
-  'treasury': { className: 'h-16' },
-}
+const NOTES = [
+  'Base',
+  'Vault, Treasury',
+  'Grimoires, Scrolls, Potions',
+]
 
-const Notes = ({ onBottom, onRight }) => {
-  const classes = [
-    'box flex-grow',
-    onBottom ? 'h-28 mb-0' : '',
-    onRight ? 'w-full' : '',
-  ].join(' ')
-
-  return Object.keys(NOTES).map(name =>
-    <NotesBox
-      key={name}
-      className={`${classes} ${onBottom ? '' : NOTES[name].className}`}
-      name={name}
-    />
+const Notes = ({ thickBorders }) => {
+  const classes = classnames(
+    'box flex-grow mb-0 mr-1 last:mr-0',
+    { 'border-2': thickBorders, 'border': !thickBorders },
   )
+
+  return <div className="flex mt-1 flex-grow">
+    {NOTES.map(name =>
+      <NotesBox
+        key={name}
+        className={classes}
+        name={name}
+      />
+    )}
+  </div>
 }
 
 module.exports = Notes

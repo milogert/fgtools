@@ -1,6 +1,6 @@
 const Stat = require('./Stat')
 
-const Stats = ({ stats, abbreviate = false }) => {
+const Stats = ({ stats, abbreviate = false, thickBorders }) => {
   const className = [
     'grid gap-1 my-1',
     stats.length === 1 ? 'grid-cols-1' : '',
@@ -9,7 +9,14 @@ const Stats = ({ stats, abbreviate = false }) => {
   ].join(' ')
 
   return <div className={className}>
-    {stats.map(stat => <Stat key={stat} stat={stat} abbreviate={abbreviate} />)}
+    {stats.map(stat =>
+      <Stat
+        key={stat}
+        stat={stat}
+        abbreviate={abbreviate}
+        thickBorders={thickBorders}
+      />
+    )}
   </div>
 }
 

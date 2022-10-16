@@ -3,7 +3,10 @@
 @import "~tailwindcss/utilities";
 
 @media print {
-  .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+  .printing {
+    height: calc(100vh - 3rem);
+    width: calc(100vw - 3rem);
+  }
 }
 
 body {
@@ -12,15 +15,13 @@ body {
 
 .box {
   @apply
-    border-2
     border-black
     p-1
-    mb-1
   ;
 
   .title {
     @apply
-      text-3xl
+      text-2xl
       flex
       justify-between
     ;
@@ -30,7 +31,7 @@ body {
 .entryLine {
   min-width: 50%;
   @apply
-    border-b-2
+    border-b
     border-black
     border-dotted
     text-lg
@@ -81,8 +82,4 @@ body {
   &.injuries {
     @apply h-16;
   }
-}
-
-.noPrint {
-  @apply print:hidden;
 }

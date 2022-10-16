@@ -1,14 +1,19 @@
+const classnames = require('classnames')
+
 const Stat = require('./Stat')
 const StatLine = require('./StatLine')
 
-const Apprentice = () =>
-  <div className="apprentice box">
+const Apprentice = ({ thickBorders }) =>
+  <div className={classnames(
+    'apprentice box mb-1',
+    { 'border': !thickBorders, 'border-2': thickBorders}
+  )}>
     <div className="title">
       Apprentice
       <Stat stat="Wounds" />
     </div>
     <div className="entryLine">Name</div>
-    <StatLine />
+    <StatLine thickBorders={thickBorders} />
     <div className="freeForm items">
       Items
     </div>
