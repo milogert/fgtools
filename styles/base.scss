@@ -10,7 +10,12 @@
 }
 
 body {
-  @apply mx-10 my-2 print:m-0;
+  @apply
+    mx-2
+    md:mx-10
+    my-2
+    print:m-0
+  ;
 }
 
 .box {

@@ -55,8 +55,8 @@ const HomePage = () => {
   const schoolCount = schools.length
 
   return <>
-    <div className="flex justify-between items-center">
-      <h1 className={`print:hidden text-4xl`}>Frostgrave Character Sheet</h1>
+    <div className="print:hidden flex justify-between items-center">
+      <h1 className="text-4xl">Frostgrave Character Sheet</h1>
       <div>Find a bug? <a className="underline text-blue-500" href="https://github.com/milogert/frostgrave-sheet/issues/new">File it here!</a></div>
     </div>
 
