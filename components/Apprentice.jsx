@@ -9,7 +9,7 @@ const Apprentice = ({ thickBorders }) =>
     { 'border': !thickBorders, 'border-2': thickBorders}
   )}>
     <div className="title">
-      Apprentice
+      <span className="mr-4">Apprentice</span>
       <Stat stat="Wounds" />
     </div>
     <div className="entryLine">Name</div>

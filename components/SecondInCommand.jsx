@@ -12,8 +12,8 @@ const SecondInCommand = ({ thickBorders }) =>
     },
   )}>
     <div className="title">
-      2nd In Command
-      <Stat stat="Wounds" />
+      <span className="mr-4">2nd In Command</span>
+      <Stat stat="Wounds" thickBorders={thickBorders} />
     </div>
     <div className="entryLine">Name</div>
     <StatLine thickBorders={thickBorders} />

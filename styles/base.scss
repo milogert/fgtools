@@ -34,12 +34,10 @@ body {
 }
 
 .entryLine {
-  min-width: 50%;
   @apply
     border-b
     border-black
     border-dotted
-    text-lg
   ;
 }
 

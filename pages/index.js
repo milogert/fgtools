@@ -1,18 +1,19 @@
 const classnames = require('classnames')
 const { assocPath, compose } = require('ramda')
-const { useState, useEffect } = require('react')
+const { useEffect, useMemo, useState } = require('react')
 
 const utils = require('../lib/utils')
 
 const Apprentice = require('../components/Apprentice')
-const Config = require('../components/Config')
-const Wizard = require('../components/Wizard')
-const School = require('../components/School')
-const Soldier = require('../components/Soldier')
 const Captain = require('../components/Captain')
-const SecondInCommand = require('../components/SecondInCommand')
+const Config = require('../components/Config')
+const ExperienceChecks = require('../components/ExperienceChecks')
 const Notes = require('../components/Notes')
 const PageBreak = require('../components/PageBreak')
+const School = require('../components/School')
+const SecondInCommand = require('../components/SecondInCommand')
+const Soldier = require('../components/Soldier')
+const Wizard = require('../components/Wizard')
 
 const HomePage = () => {
   const [ expansions, setExpansions ] = useState({
@@ -27,13 +28,15 @@ const HomePage = () => {
     },
   })
 
-  const [ showPreview, setShowPreview ] = useState(true)
-  const [ hasCaptain, setHasCaptain ] = useState(false)
-  const [ thickBorders, setThickBorders ] = useState(false)
-  const [ soldierCount, setSoldierCount ] = useState(9)
+  const [ allSchools, setAllSchools ] = useState(utils.getSchools(expansions))
   const [ allowCustomSchools, setAllowCustomSchools ] = useState(false)
   const [ customSchoolsText, setCustomSchoolsText ] = useState(null)
-  const [ allSchools, setAllSchools ] = useState(utils.getSchools(expansions))
+  const [ expChecks, setExpChecks ] = useState(true)
+  const [ hasCaptain, setHasCaptain ] = useState(false)
+  const [ showPreview, setShowPreview ] = useState(true)
+  const [ showSpellDetails, setShowSpellDetails ] = useState(true)
+  const [ soldierCount, setSoldierCount ] = useState(9)
+  const [ thickBorders, setThickBorders ] = useState(false)
 
   useEffect(() => {
     if (!expansions.bloodLegacy.enabled && expansions.bloodLegacy.vampireWizard) {
@@ -51,8 +54,7 @@ const HomePage = () => {
     })
   }, [ allowCustomSchools, customSchoolsText, expansions ])
 
-  const schools = Object.keys(allSchools).sort()
-  const schoolCount = schools.length
+  const schools = useMemo(() => Object.keys(allSchools).sort(), [ allSchools ])
 
   return <>
     <div className="print:hidden flex justify-between items-center">
@@ -63,15 +65,17 @@ const HomePage = () => {
     <Config
       allowCustomSchools={{ get: allowCustomSchools, set: setAllowCustomSchools }}
       customSchoolsText={{ get: customSchoolsText, set: setCustomSchoolsText }}
+      expChecks={{ get: expChecks, set: setExpChecks }}
       expansions={{ get: expansions, set: setExpansions }}
       hasCaptain={{ get: hasCaptain, set: setHasCaptain }}
+      showSpellDetails={{ get: showSpellDetails, set: setShowSpellDetails }}
       showPreview={{ get: showPreview, set: setShowPreview }}
       soldierCount={{ get: soldierCount, set: setSoldierCount }}
       thickBorders={{ get: thickBorders, set: setThickBorders }}
     />
 
     {showPreview && <>
-      <div className="figures printing print:m-auto grid grid-cols-12 gap-1">
+      <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
         <div className="figures-main col-span-5 flex flex-col">
           <Wizard thickBorders={thickBorders} />
           { expansions.bloodLegacy.vampireWizard
@@ -81,9 +85,12 @@ const HomePage = () => {
           { hasCaptain
             ? <Captain thickBorders={thickBorders} />
             : <div className={classnames(
-                'box flex-grow',
+                'box flex flex-col flex-grow',
                 { 'border': !thickBorders, 'border-2': thickBorders}
-              )}>Notes</div>
+              )}>
+                <div className="flex-grow">Notes</div>
+                {expChecks && <ExperienceChecks />}
+              </div>
           }
         </div>
         <div className="figures-soldiers col-span-7 flex flex-col">
@@ -100,7 +107,7 @@ const HomePage = () => {
       <PageBreak />
 
       { soldierCount > 9 && <>
-        <div className="figures printing print:m-auto grid grid-cols-12 gap-1">
+        <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
           <div className="figures-notes col-span-5 flex flex-col">
             <div className={classnames(
               'box flex-grow',
@@ -121,16 +128,29 @@ const HomePage = () => {
         <PageBreak />
       </>}
 
-      {schools.length <= 10 &&
-        <div className="flex flex-col printing print:m-auto">
-          <div className="schools-overflow grid grid-cols-2 gap-1">
+      {schools.length <= 12 &&
+        <div className="flex flex-col printing print:mx-auto print:mt-2">
+          <div className="schools-overflow grid grid-cols-3 gap-1">
             {schools
               .map(name => <School
                 key={name}
                 name={name}
                 spells={allSchools[name]}
                 thickBorders={thickBorders}
+                showSpellDetails={showSpellDetails}
               />)
+            }
+
+            {schools.length % 3 > 0 &&
+              <div className={classnames(
+                'box',
+                schools.length % 3 === 1
+                  ? 'col-span-2'
+                  : 'col-span-1',
+                { 'border': !thickBorders, 'border-2': thickBorders}
+              )}>
+                  <div className="flex-grow">Misc Notes</div>
+              </div>
             }
           </div>
 
@@ -138,35 +158,59 @@ const HomePage = () => {
         </div>
       }
 
-      {schools.length > 10 && <>
-        <div className="flex flex-col printing print:m-auto">
-          <div className="schools-overflow grid grid-cols-2 gap-1">
+      {schools.length > 12 && <>
+        <div className="flex flex-col printing print:mx-auto print:mt-2o">
+          <div className="schools-overflow grid grid-cols-3 gap-1">
             {schools
-              .slice(0, 10)
+              .slice(0, 15)
               .map(name => <School
                 key={name}
                 name={name}
                 spells={allSchools[name]}
                 thickBorders={thickBorders}
+                showSpellDetails={showSpellDetails}
               />)
             }
-          </div>
 
-          <Notes thickBorders={thickBorders} />
+            {schools.slice(12, schools.length).length % 3 > 0 &&
+              <div className={classnames(
+                'box',
+                schools.length % 3 === 1
+                  ? 'col-span-2'
+                  : 'col-span-1',
+                { 'border': !thickBorders, 'border-2': thickBorders}
+              )}>
+                  <div className="flex-grow">Misc Notes</div>
+              </div>
+            }
+          </div>
         </div>
 
         <PageBreak />
 
         <div className="flex flex-col printing print:m-auto">
-          <div className="schools-overflow grid grid-cols-2 gap-1">
+          <div className="schools-overflow grid grid-cols-3 gap-1">
             {schools
-              .slice(10, schools.length)
+              .slice(15, schools.length)
               .map(name => <School
                 key={name}
                 name={name}
                 spells={allSchools[name]}
                 thickBorders={thickBorders}
+                showSpellDetails={showSpellDetails}
               />)
+            }
+
+            {schools.slice(15, schools.length).length % 3 > 0 &&
+              <div className={classnames(
+                'box',
+                schools.length % 3 === 1
+                  ? 'col-span-2'
+                  : 'col-span-1',
+                { 'border': !thickBorders, 'border-2': thickBorders}
+              )}>
+                  <div className="flex-grow">Misc Notes</div>
+              </div>
             }
           </div>
 

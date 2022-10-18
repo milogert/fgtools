@@ -2,7 +2,7 @@ const Stat = require('./Stat')
 
 const Stats = ({ stats, abbreviate = false, thickBorders }) => {
   const className = [
-    'grid gap-1 my-1',
+    'flex my-1',
     stats.length === 1 ? 'grid-cols-1' : '',
     stats.length === 2 ? 'grid-cols-2' : '',
     stats.length === 6 ? 'grid-cols-6' : '',

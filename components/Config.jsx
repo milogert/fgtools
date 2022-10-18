@@ -18,8 +18,10 @@ const Config = props => {
   const {
     allowCustomSchools,
     customSchoolsText,
+    expChecks,
     expansions,
     hasCaptain,
+    showSpellDetails,
     showPreview,
     soldierCount,
     thickBorders,
@@ -62,6 +64,24 @@ const Config = props => {
         type: "checkbox",
         onChange: () => thickBorders.set(!thickBorders.get),
         checked: thickBorders.get,
+      }}
+    />
+    <FormRow
+      name="expChecks"
+      label="Experience Checkmarks"
+      inputProps={{
+        type: "checkbox",
+        onChange: () => expChecks.set(!expChecks.get),
+        checked: expChecks.get,
+      }}
+    />
+    <FormRow
+      name="spellDetails"
+      label="Show Spell Details"
+      inputProps={{
+        type: "checkbox",
+        onChange: () => showSpellDetails.set(!showSpellDetails.get),
+        checked: showSpellDetails.get,
       }}
     />
 
@@ -118,7 +138,7 @@ const Config = props => {
           id="customSchools"
           value={customSchoolsText.get}
           onChange={e => customSchoolsText.set(e.target.value)}
-          placeholder="school name: spell 1, spell 2, ..."
+          placeholder="school name: spell 1 range 10, spell 2 range 10, ..."
         ></textarea>
       </div>
     }

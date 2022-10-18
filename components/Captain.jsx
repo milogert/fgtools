@@ -10,12 +10,11 @@ const Captain = ({ thickBorders }) =>
     { 'border': !thickBorders, 'border-2': thickBorders }
   )}>
     <div className="title">
-      Captain
+      <span className="mr-4">Captain</span>
       <Stat stat="Wounds" thickBorders={thickBorders} />
-
     </div>
     <div className="entryLine">Name</div>
-    <Stats stats={[ 'Level', 'XP' ]} />
+    <Stats stats={[ 'Level', 'XP' ]} thickBorders={thickBorders} />
     <StatLine thickBorders={thickBorders} />
     <div className="freeForm items">
       Items

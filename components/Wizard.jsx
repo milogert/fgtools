@@ -10,10 +10,9 @@ const Wizard = ({ thickBorders }) =>
     { 'border': !thickBorders, 'border-2': thickBorders}
   )}>
     <div className="title">
-      Wizard
+      <span className="mr-4">Wizard</span>
       <Stat stat="Wounds" thickBorders={thickBorders} />
     </div>
-    <div className="header"></div>
     <div className="entryLine">Name</div>
     <div className="entryLine">School</div>
     <Stats stats={[ 'Level', 'XP' ]} />
