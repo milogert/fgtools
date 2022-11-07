@@ -1,26 +1,23 @@
-const classnames = require('classnames')
-
-const Stat = require('./Stat')
-const StatLine = require('./StatLine')
+import Box from './Box'
+import EntryLine from './EntryLine'
+import Stat from './Stat'
+import StatLine from './StatLine'
 
 const Apprentice = ({ thickBorders }) =>
-  <div className={classnames(
-    'apprentice box mb-1',
-    { 'border': !thickBorders, 'border-2': thickBorders}
-  )}>
+  <Box className="apprentice mb-1" thickBorders={thickBorders}>
     <div className="title">
       <span className="mr-4">Apprentice</span>
       <Stat stat="Wounds" />
     </div>
-    <div className="entryLine">Name</div>
+    <div><EntryLine thickBorders={thickBorders}>Name</EntryLine></div>
     <StatLine thickBorders={thickBorders} />
-    <div className="freeForm items">
+    <div className="h-24">
       Items
     </div>
 
-    <div className="freeForm injuries">
+    <div className="h-16">
       Injuries
     </div>
-  </div>
+  </Box>
 
-module.exports = Apprentice
+export default Apprentice

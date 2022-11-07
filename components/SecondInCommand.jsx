@@ -1,29 +1,23 @@
-const classnames = require('classnames')
-
-const Stat = require('./Stat')
-const StatLine = require('./StatLine')
+import Box from './Box'
+import EntryLine from './EntryLine'
+import Stat from './Stat'
+import StatLine from './StatLine'
 
 const SecondInCommand = ({ thickBorders }) =>
-  <div className={classnames(
-    'second-in-command box mb-1',
-    {
-      'border': !thickBorders,
-      'border-2': thickBorders,
-    },
-  )}>
+  <Box className="second-in-command mb-1" thickBorders={thickBorders}>
     <div className="title">
       <span className="mr-4">2nd In Command</span>
       <Stat stat="Wounds" thickBorders={thickBorders} />
     </div>
-    <div className="entryLine">Name</div>
+    <div><EntryLine thickBorders={thickBorders}>Name</EntryLine></div>
     <StatLine thickBorders={thickBorders} />
-    <div className={"freeForm items"}>
+    <div className="h-24">
       Items
     </div>
 
-    <div className={"freeForm injuries"}>
+    <div className="h-16">
       Injuries
     </div>
-  </div>
+  </Box>
 
-module.exports = SecondInCommand
+export default SecondInCommand

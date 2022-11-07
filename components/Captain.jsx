@@ -1,30 +1,27 @@
-const classnames = require('classnames')
-
-const Stat = require('./Stat')
-const Stats = require('./Stats')
-const StatLine = require('./StatLine')
+import Box from './Box'
+import EntryLine from './EntryLine'
+import Stat from './Stat'
+import StatLine from './StatLine'
+import Stats from './Stats'
 
 const Captain = ({ thickBorders }) =>
-  <div className={classnames(
-    'captain box mb-1',
-    { 'border': !thickBorders, 'border-2': thickBorders }
-  )}>
+  <Box className="captain mb-1" thickBorders={thickBorders}>
     <div className="title">
       <span className="mr-4">Captain</span>
       <Stat stat="Wounds" thickBorders={thickBorders} />
     </div>
-    <div className="entryLine">Name</div>
+    <div><EntryLine thickBorders={thickBorders}>Name</EntryLine></div>
     <Stats stats={[ 'Level', 'XP' ]} thickBorders={thickBorders} />
     <StatLine thickBorders={thickBorders} />
-    <div className="freeForm items">
+    <div className="h-24">
       Items
     </div>
-    <div className="freeForm tricksOfTheTrade">
+    <div className="h-24">
       Tricks of the Trade
     </div>
-    <div className="freeForm injuries">
+    <div className="h-16">
       Injuries
     </div>
-  </div>
+  </Box>
 
-module.exports = Captain
+export default Captain

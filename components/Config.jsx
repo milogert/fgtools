@@ -1,18 +1,16 @@
-const FormRow = ({
+export const FormRow = ({
   className,
   inputProps,
   name,
   label,
-}) => {
-  return <div className={`formRow ${className || ''}`}>
-    <label htmlFor={name}>{label}</label>
-    <div className="formSpacer"></div>
-    <input
-      id={name}
-      {...inputProps}
-    />
+}) =>
+  <div className={`form-row flex justify-between items-center h-9  ${className || ''}`}>
+    <label htmlFor={name} className="flex flex-grow" aria-hidden="true">
+      {label}
+      <div className="form-spacer flex-grow mx-3 border-b-2 border-dotted border-black" />
+    </label>
+    <input id={name} {...inputProps} />
   </div>
-}
 
 const Config = props => {
   const {
@@ -85,54 +83,18 @@ const Config = props => {
       }}
     />
 
-    <h2 className="text-2xl mt-4">Expansions</h2>
-    {Object.keys(expansions.get).sort().map(key => {
-      const expConfig = expansions.get[key]
-
-      const onChange = valueKey => {
-        const newKey = { ...expConfig, [valueKey]: !expConfig[valueKey] }
-        const newExpansions = { ...expansions.get, [key]: newKey }
-        expansions.set(newExpansions)
-      }
-
-      return <div key={key}>
-        <FormRow
-          name={key}
-          label={expConfig.label}
-          inputProps={{
-            type: "checkbox",
-            onChange: () => onChange('enabled'),
-            checked: expConfig.enabled,
-          }}
-        />
-        {key === 'bloodLegacy' && expConfig.enabled &&
-          <FormRow
-            name="vampireWizard"
-            label="Make wizard a vampire?"
-            className="expansion-option ml-4"
-            inputProps={{
-              type: "checkbox",
-              onChange: () => onChange('vampireWizard'),
-              checked: expConfig.vampireWizard,
-            }}
-          />
-        }
-      </div>
-    })}
-
     <h2 className="text-2xl mt-4">Custom</h2>
-    <div className="formRow">
-      <label htmlFor="allowCustomSchools">Configure custom schools of magic?</label>
-      <div className="formSpacer"></div>
-      <input
-        id="allowCustomSchools"
-        type="checkbox"
-        checked={allowCustomSchools.get}
-        onChange={() => allowCustomSchools.set(!allowCustomSchools.get)}
-      />
-    </div>
+    <FormRow
+      name="allowCustomSchools"
+      label="Configure custom schools of magic?"
+      inputProps={{
+        type: "checkbox",
+        onChange: () => allowCustomSchools.set(!allowCustomSchools.get),
+        checked: allowCustomSchools.get,
+      }}
+    />
     {allowCustomSchools.get &&
-      <div className="formRow--area">
+      <div className="form-row--area">
         <label htmlFor="customSchools">Custom Magic Schools</label>
         <textarea
           id="customSchools"
@@ -152,4 +114,4 @@ const Config = props => {
   </div>
 }
 
-module.exports = Config
+export default Config

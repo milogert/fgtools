@@ -1,224 +1,109 @@
-const classnames = require('classnames')
-const { assocPath, compose } = require('ramda')
-const { useEffect, useMemo, useState } = require('react')
+import Link from 'next/link'
 
-const utils = require('../lib/utils')
-
-const Apprentice = require('../components/Apprentice')
-const Captain = require('../components/Captain')
-const Config = require('../components/Config')
-const ExperienceChecks = require('../components/ExperienceChecks')
-const Notes = require('../components/Notes')
-const PageBreak = require('../components/PageBreak')
-const School = require('../components/School')
-const SecondInCommand = require('../components/SecondInCommand')
-const Soldier = require('../components/Soldier')
-const Wizard = require('../components/Wizard')
-
-const HomePage = () => {
-  const [ expansions, setExpansions ] = useState({
-    bloodLegacy: {
-      label: "Blood Legacy",
-      enabled: false,
-      vampireWizard: false,
-    },
-    intoTheBreedingPits: {
-      label: "Into the Breeding Pits",
-      enabled: false,
-    },
-  })
-
-  const [ allSchools, setAllSchools ] = useState(utils.getSchools(expansions))
-  const [ allowCustomSchools, setAllowCustomSchools ] = useState(false)
-  const [ customSchoolsText, setCustomSchoolsText ] = useState(null)
-  const [ expChecks, setExpChecks ] = useState(true)
-  const [ hasCaptain, setHasCaptain ] = useState(false)
-  const [ showPreview, setShowPreview ] = useState(true)
-  const [ showSpellDetails, setShowSpellDetails ] = useState(true)
-  const [ soldierCount, setSoldierCount ] = useState(9)
-  const [ thickBorders, setThickBorders ] = useState(false)
-
-  useEffect(() => {
-    if (!expansions.bloodLegacy.enabled && expansions.bloodLegacy.vampireWizard) {
-      compose(
-        setExpansions,
-        assocPath([ 'bloodLegacy', 'vampireWizard' ], false)
-      )(expansions)
-    }
-  }, [ expansions ])
-
-  useEffect(() => {
-    setAllSchools({
-      ...utils.getSchools(expansions),
-      ...(allowCustomSchools ? utils.parseCustomSchools(customSchoolsText) : {}),
-    })
-  }, [ allowCustomSchools, customSchoolsText, expansions ])
-
-  const schools = useMemo(() => Object.keys(allSchools).sort(), [ allSchools ])
-
-  return <>
-    <div className="print:hidden flex justify-between items-center">
-      <h1 className="text-4xl">Frostgrave Character Sheet</h1>
-      <div>Find a bug? <a className="underline text-blue-500" href="https://github.com/milogert/frostgrave-sheet/issues/new">File it here!</a></div>
+const HomePage = () =>
+  <div className="flex justify-center flex-col">
+    <div className="grid grid-cols-2 gap-2 mx-auto">
+      <div className="relative flex justify-center items-center h-40 w-40 border border-black border-solid rounded-md hover:bg-gray-300">
+        <Link href="/wizard-sheet">
+          <a className="content-[''] absolute inset-0">
+            <span className="h-full flex justify-center items-center">Wizard Sheet</span>
+          </a>
+        </Link>
+      </div>
+      <div className="relative flex justify-center items-center h-40 w-40 border border-black border-solid rounded-md hover:bg-gray-300">
+        <Link href="/spell-cards">
+          <a className="content-[''] absolute inset-0">
+            <span className="h-full flex justify-center items-center">Select Spell Cards</span>
+          </a>
+        </Link>
+      </div>
     </div>
 
-    <Config
-      allowCustomSchools={{ get: allowCustomSchools, set: setAllowCustomSchools }}
-      customSchoolsText={{ get: customSchoolsText, set: setCustomSchoolsText }}
-      expChecks={{ get: expChecks, set: setExpChecks }}
-      expansions={{ get: expansions, set: setExpansions }}
-      hasCaptain={{ get: hasCaptain, set: setHasCaptain }}
-      showSpellDetails={{ get: showSpellDetails, set: setShowSpellDetails }}
-      showPreview={{ get: showPreview, set: setShowPreview }}
-      soldierCount={{ get: soldierCount, set: setSoldierCount }}
-      thickBorders={{ get: thickBorders, set: setThickBorders }}
-    />
+    <div className="flex justify-between items-center">
+      <h2 className="text-3xl">About</h2>
+    </div>
 
-    {showPreview && <>
-      <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
-        <div className="figures-main col-span-5 flex flex-col">
-          <Wizard thickBorders={thickBorders} />
-          { expansions.bloodLegacy.vampireWizard
-            ? <SecondInCommand thickBorders={thickBorders} />
-            : <Apprentice thickBorders={thickBorders} />
-          }
-          { hasCaptain
-            ? <Captain thickBorders={thickBorders} />
-            : <div className={classnames(
-                'box flex flex-col flex-grow',
-                { 'border': !thickBorders, 'border-2': thickBorders}
-              )}>
-                <div className="flex-grow">Notes</div>
-                {expChecks && <ExperienceChecks />}
-              </div>
-          }
-        </div>
-        <div className="figures-soldiers col-span-7 flex flex-col">
-          {
-            Array(Math.min(soldierCount, 9))
-              .fill()
-              .map((_, idx) =>
-                <Soldier key={idx} thickBorders={thickBorders} />
-              )
-          }
-        </div>
-      </div>
+    <h3 className="text-2xl mt-3">What is this?</h3>
 
-      <PageBreak />
+    <p className="mb-2">
+      This site is here to generate a printable wizard sheet for&nbsp;
+      <a
+        href="https://ospreypublishing.com/frostgrave-second-edition"
+        className="underline text-blue-500"
+        target="_blank"
+        rel="noreferrer"
+      >Frostgrave</a>
+      , a fantasy skirmish wargame by Joseph McCullough.</p>
 
-      { soldierCount > 9 && <>
-        <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
-          <div className="figures-notes col-span-5 flex flex-col">
-            <div className={classnames(
-              'box flex-grow',
-              { 'border': !thickBorders, 'border-2': thickBorders}
-            )}>Notes</div>
-          </div>
-          <div className="figures-soldiers col-span-7">
-            {
-              Array(soldierCount - 9)
-                .fill()
-                .map((_, idx) =>
-                  <Soldier key={idx} thickBorders={thickBorders} />
-                )
-            }
-          </div>
-        </div>
+    <h3 className="text-2xl">How do I use this site?</h3>
 
-        <PageBreak />
-      </>}
+    <p className="mb-2">Configure your sheet with the section near the top of the page. The options can be toggled on and off to change the appearance of the sheet.</p>
 
-      {schools.length <= 12 &&
-        <div className="flex flex-col printing print:mx-auto print:mt-2">
-          <div className="schools-overflow grid grid-cols-3 gap-1">
-            {schools
-              .map(name => <School
-                key={name}
-                name={name}
-                spells={allSchools[name]}
-                thickBorders={thickBorders}
-                showSpellDetails={showSpellDetails}
-              />)
-            }
+    <p className="mb-2">Once you are satisfied with the preview you can just print the sheet. All the configuration options and the headers will not appear on the page.</p>
 
-            {schools.length % 3 > 0 &&
-              <div className={classnames(
-                'box',
-                schools.length % 3 === 1
-                  ? 'col-span-2'
-                  : 'col-span-1',
-                { 'border': !thickBorders, 'border-2': thickBorders}
-              )}>
-                  <div className="flex-grow">Misc Notes</div>
-              </div>
-            }
-          </div>
+    <h3 className="text-2xl mt-3">FAQ</h3>
 
-          <Notes thickBorders={thickBorders} />
-        </div>
-      }
+    <h4 className="text-xl mt-3">My preview isn't printing properly!</h4>
 
-      {schools.length > 12 && <>
-        <div className="flex flex-col printing print:mx-auto print:mt-2o">
-          <div className="schools-overflow grid grid-cols-3 gap-1">
-            {schools
-              .slice(0, 15)
-              .map(name => <School
-                key={name}
-                name={name}
-                spells={allSchools[name]}
-                thickBorders={thickBorders}
-                showSpellDetails={showSpellDetails}
-              />)
-            }
+    <p className="mb-2">Step one, try printing in Google Chrome or Firefox. Safari has issues that I am stuck on and I semi-gave up on.</p>
 
-            {schools.slice(12, schools.length).length % 3 > 0 &&
-              <div className={classnames(
-                'box',
-                schools.length % 3 === 1
-                  ? 'col-span-2'
-                  : 'col-span-1',
-                { 'border': !thickBorders, 'border-2': thickBorders}
-              )}>
-                  <div className="flex-grow">Misc Notes</div>
-              </div>
-            }
-          </div>
-        </div>
+    <p className="mb-2">
+      Step two, if the printing still doesn't appear correctly then please file a bug&nbsp;
+      <a
+        href="https://github.com/milogert/frostgrave-sheet/issues/new"
+        className="underline text-blue-500"
+        target="_blank"
+        rel="noreferrer"
+      >here</a>
+      .
+    </p>
 
-        <PageBreak />
+    <h4 className="text-xl mt-3">You are missing expansion X!</h4>
 
-        <div className="flex flex-col printing print:m-auto">
-          <div className="schools-overflow grid grid-cols-3 gap-1">
-            {schools
-              .slice(15, schools.length)
-              .map(name => <School
-                key={name}
-                name={name}
-                spells={allSchools[name]}
-                thickBorders={thickBorders}
-                showSpellDetails={showSpellDetails}
-              />)
-            }
+    <p className="mb-2">
+      It's because I don't have the book or I haven't played it yet. Feel free to&nbsp;
+      <a
+        href="https://paypal.me/milogert"
+        className="underline text-blue-500"
+        target="_blank"
+        rel="noreferrer"
+      >send me money</a>
+      &nbsp;to buy the expansion. Once it arrives I'll add it and let you know!
+    </p>
 
-            {schools.slice(15, schools.length).length % 3 > 0 &&
-              <div className={classnames(
-                'box',
-                schools.length % 3 === 1
-                  ? 'col-span-2'
-                  : 'col-span-1',
-                { 'border': !thickBorders, 'border-2': thickBorders}
-              )}>
-                  <div className="flex-grow">Misc Notes</div>
-              </div>
-            }
-          </div>
+    <h4 className="text-xl mt-3">Can you make the sheet fillable so I can print it and not have to write manually?</h4>
 
-          <Notes thickBorders={thickBorders} />
-        </div>
-      </>}
-    </>}
-  </>
-}
+    <p className="mb-2">Probably not, for a variety of reasons:</p>
+    <ul className="list-outside list-disc">
+      <li className="ml-8">There is <i>a lot</i> more code and logic involved. My goal with this page is to keep it light.</li>
+      <li className="ml-8">You frequently have to change entries for whole soldiers, so really the main thing that would be worth doing this for is the wizard school, and then you can just write it.</li>
+      <li className="ml-8">I wouldn't use this feature.</li>
+      <li className="ml-8">I like the pen and paper asthetic.</li>
+    </ul>
+
+    <h3 className="text-2xl mt-3">Author</h3>
+
+    <p className="mb-2">
+      This site was written by&nbsp;
+      <a
+        href="https://github.com/milogert"
+        className="underline text-blue-500"
+        target="_blank"
+        rel="noreferrer"
+      >Milo Gertjejansen</a>
+      .
+    </p>
+
+    <h3 className="text-2xl mt-3">Changelog</h3>
+
+    <h4 className="text-xl mt-3">2022-11-06</h4>
+
+    <p className="mb-2">Adds Spell Cards.</p>
+    <p className="mb-2">Makes expansions app-wide.</p>
+
+    <h4 className="text-xl mt-3">2022-10-27</h4>
+
+    <p className="mb-2">Initial release</p>
+  </div>
 
 export default HomePage

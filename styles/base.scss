@@ -19,11 +19,6 @@ body {
 }
 
 .box {
-  @apply
-    border-black
-    p-1
-  ;
-
   .title {
     @apply
       text-2xl
@@ -41,9 +36,7 @@ body {
   ;
 }
 
-.formRow {
-  @apply flex justify-between items-center h-9;
-
+.form-row {
   &--area {
     @apply flex flex-col items-start;
 
@@ -58,31 +51,5 @@ body {
 
   input[type="number"] {
     @apply border-2 border-black rounded text-right p-1;
-  }
-
-  .formSpacer {
-    @apply
-      flex-grow
-
-      mx-3
-
-      border-b-2
-      border-dotted
-      border-black
-    ;
-  }
-}
-
-.freeForm {
-  &.items {
-    @apply h-24;
-  }
-
-  &.tricksOfTheTrade {
-    @apply h-24;
-  }
-
-  &.injuries {
-    @apply h-16;
   }
 }

@@ -11,7 +11,10 @@ module.exports = {
     extend: {
       screens: {
         'print': {'raw': 'print'},
-      }
+      },
+      aspectRatio: {
+        'spell-card': '2.5 / 3.5',
+      },
     },
   },
   variants: {

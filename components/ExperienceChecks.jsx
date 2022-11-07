@@ -1,4 +1,4 @@
-const { range } = require('ramda')
+import { range } from 'ramda'
 
 const ExperienceRow = ({ name, boxes }) =>
     <div
@@ -31,4 +31,4 @@ const ExperienceChecks = () => {
   )
 }
 
-module.exports = ExperienceChecks
+export default ExperienceChecks
