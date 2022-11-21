@@ -89,7 +89,8 @@ const HomePage = () =>
         </thead>
         <tbody>
           <tr className="even:bg-gray-300">
-            <td>Core</td>                   <td>✅</td><td>✅</td></tr>
+            <td>Core</td>                   <td>✅</td><td>✅</td>
+          </tr>
           <tr className="even:bg-gray-300">
             <td>Thaw of the Lich Lord</td>  <td>✅</td><td>✅</td>
           </tr>
@@ -97,22 +98,22 @@ const HomePage = () =>
             <td>Into the Breeding Pits</td> <td>✅</td><td>✅</td>
           </tr>
           <tr className="even:bg-gray-300">
-            <td>Forgotton Pacts</td>        <td>✅</td><td>❌</td>
+            <td>Forgotton Pacts</td>        <td>❌</td><td>❌</td>
           </tr>
           <tr className="even:bg-gray-300">
-            <td>Frostgrave Folio</td>       <td>✅</td><td>❌</td>
+            <td>Frostgrave Folio</td>       <td>✅</td><td>✅</td>
           </tr>
           <tr className="even:bg-gray-300">
-            <td>Maze of Malacor</td>        <td>✅</td><td>❌</td>
+            <td>Maze of Malacor</td>        <td>❌</td><td>❌</td>
           </tr>
           <tr className="even:bg-gray-300">
-            <td>The Grimoire</td>           <td>✅</td><td>❌</td>
+            <td>The Grimoire</td>           <td>❌</td><td>❌</td>
           </tr>
           <tr className="even:bg-gray-300">
-            <td>Wizards&apos; Conclave</td> <td>✅</td><td>❌</td>
+            <td>Wizards&apos; Conclave</td> <td>✅</td><td>➖</td>
           </tr>
           <tr className="even:bg-gray-300">
-            <td>Perilous Dark</td>          <td>✅</td><td>❌</td>
+            <td>Perilous Dark</td>          <td>✅</td><td>➖</td>
           </tr>
           <tr className="even:bg-gray-300">
             <td>The Red King</td>           <td>✅</td><td>➖</td>
@@ -135,6 +136,7 @@ const HomePage = () =>
       <li className="ml-8">You frequently have to change entries for whole soldiers, so really the main thing that would be worth doing this for is the wizard school, and then you can just write it.</li>
       <li className="ml-8">I wouldn&apos;t use this feature.</li>
       <li className="ml-8">I like the pen and paper asthetic.</li>
+      <li className="ml-8">Finish implementing stray things.</li>
     </ul>
 
     <h3 className="text-2xl mt-3">Author</h3>

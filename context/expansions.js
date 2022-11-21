@@ -2,6 +2,7 @@ import { find, propEq } from "ramda"
 import { createContext, useContext, useState } from "react"
 import {
   EXPANSION_BLOOD_LEGACY,
+  EXPANSION_FROSTGRAVE_FOLIO,
   EXPANSION_INTO_THE_BREEDING_PITS,
 } from "../lib/constants"
 
@@ -13,6 +14,11 @@ export const ExpansionProvider = ({ children }) => {
       label: "Into the Breeding Pits",
       enabled: false,
       key: EXPANSION_INTO_THE_BREEDING_PITS,
+    },
+    {
+      label: "Frostgrave Folio",
+      enabled: false,
+      key: EXPANSION_FROSTGRAVE_FOLIO,
     },
     {
       label: "Blood Legacy",

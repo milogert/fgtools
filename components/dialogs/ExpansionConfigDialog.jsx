@@ -3,7 +3,6 @@ import {
   lensPath,
   over,
   pipe,
-  prop,
   propEq,
 } from "ramda"
 import { useCallback, useEffect } from "react"

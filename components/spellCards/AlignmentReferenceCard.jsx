@@ -23,12 +23,16 @@ const AlignmentReferenceCard = ({ schoolName }) => {
   const { expansions } = useExpansionContext()
   const allSchools = getSchools(expansions)
   const schoolKeys = Object.keys(allSchools)
+  const { schoolAdjustment } = spellData[schoolName]
+
+  if (!schoolAdjustment) {
+    return null
+  }
+
   const {
-    schoolAdjustment: {
-      aligned,
-      opposed,
-    }
-  } = spellData[schoolName]
+    aligned,
+    opposed,
+  } = schoolAdjustment
 
   const specificSpells = [ schoolName, ...aligned, ...opposed ]
   const neutral = neutralSchools(specificSpells)
