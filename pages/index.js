@@ -1,9 +1,14 @@
+import Head from 'next/head'
 import Link from 'next/link'
 
 import ChangelogEntry from '../components/ChangelogEntry'
 
 const HomePage = () =>
   <div className="flex justify-center flex-col">
+    <Head>
+      <title>Frostgrave Tools</title>
+    </Head>
+
     <div className="grid grid-cols-2 gap-2 mx-auto">
       <div className="relative flex justify-center items-center h-40 w-40 border border-black border-solid rounded-md hover:bg-gray-300">
         <Link href="/wizard-sheet">

@@ -19,6 +19,7 @@ import SecondInCommand from '../components/wizardSheet/SecondInCommand'
 import Soldier from '../components/wizardSheet/Soldier'
 import Wizard from '../components/wizardSheet/Wizard'
 import { useExpansion, useExpansionContext } from "../context/expansions"
+import Head from 'next/head'
 
 const WizardSheet = () => {
   const { expansions } = useExpansionContext()
@@ -44,6 +45,10 @@ const WizardSheet = () => {
   const schoolCount = schools.length
 
   return <>
+    <Head>
+      <title>Wizard Sheet - Frostgrave Tools</title>
+    </Head>
+
     <div className="print:hidden flex justify-between items-center">
       <h2 className="text-3xl">Wizard Sheet</h2>
     </div>

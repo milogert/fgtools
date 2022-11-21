@@ -9,6 +9,7 @@ import FormRow from "../components/FormRow"
 import AlignmentReferenceCard from "../components/spellCards/AlignmentReferenceCard"
 import { useRouter } from "next/router"
 import PrintWarning from "../components/PrintWarning"
+import Head from "next/head"
 
 const insertBreaks = (spell, idx) =>
   ([
@@ -45,6 +46,10 @@ const SpellCards = () => {
   )
 
   return <div>
+    <Head>
+      <title>Spell Cards - Frostgrave Tools</title>
+    </Head>
+
     <div className="print:hidden flex flex-col justify-between">
       <h2 className="text-3xl">Spell Cards</h2>
 
