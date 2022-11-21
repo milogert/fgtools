@@ -136,7 +136,6 @@ const HomePage = () =>
       <li className="ml-8">You frequently have to change entries for whole soldiers, so really the main thing that would be worth doing this for is the wizard school, and then you can just write it.</li>
       <li className="ml-8">I wouldn&apos;t use this feature.</li>
       <li className="ml-8">I like the pen and paper asthetic.</li>
-      <li className="ml-8">Finish implementing stray things.</li>
     </ul>
 
     <h3 className="text-2xl mt-3">Author</h3>
@@ -164,7 +163,9 @@ const HomePage = () =>
         <p className="mb-2">Re-arrange code for better organization.</p>
         <p className="mb-2">Add favicon.</p>
         <p className="mb-2">Add expansion table</p>
+        <p className="mb-2">Finish implementing stray things.</p>
       </ChangelogEntry>
+
       <ChangelogEntry title="2022-11-19">
         <p className="mb-2">Makes slightly more mobile friendly.</p>
         <p className="mb-2">Sets up for school adjustment card.</p>
