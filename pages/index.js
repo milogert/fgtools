@@ -76,6 +76,55 @@ const HomePage = () =>
         rel="noreferrer"
       >send me money</a>
       &nbsp;to buy the expansion. Once it arrives I&apos;ll add it and let you know!
+
+
+      <h4 className="text-lg mt-3">Owned Expansions</h4>
+      <table className="table-auto w-full">
+        <thead>
+          <tr className="font-bold">
+            <td>Expansion</td>
+            <td>Released?</td>
+            <td>Implementation Status</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="even:bg-gray-300">
+            <td>Core</td>                   <td>✅</td><td>✅</td></tr>
+          <tr className="even:bg-gray-300">
+            <td>Thaw of the Lich Lord</td>  <td>✅</td><td>✅</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Into the Breeding Pits</td> <td>✅</td><td>✅</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Forgotton Pacts</td>        <td>✅</td><td>❌</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Frostgrave Folio</td>       <td>✅</td><td>❌</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Maze of Malacor</td>        <td>✅</td><td>❌</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>The Grimoire</td>           <td>✅</td><td>❌</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Wizards&apos; Conclave</td> <td>✅</td><td>❌</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Perilous Dark</td>          <td>✅</td><td>❌</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>The Red King</td>           <td>✅</td><td>➖</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Blood Legacy</td>           <td>❌</td><td>⭐️ - Partial. I have spell names but no details.</td>
+          </tr>
+          <tr className="even:bg-gray-300">
+            <td>Fireheart</td>              <td>❌ (2023)</td><td>❌</td>
+          </tr>
+        </tbody>
+      </table>
     </p>
 
     <h4 className="text-xl mt-3">Can you make the sheet fillable so I can print it and not have to write manually?</h4>
@@ -101,12 +150,18 @@ const HomePage = () =>
       .
     </p>
 
+    <p className="mb-2">
+      I used NextJS and host on Vercel.
+    </p>
+
     <h3 className="text-2xl mt-3">Changelog</h3>
 
     <div>
       <ChangelogEntry title="2022-11-21">
         <p className="mb-2">Finish spell card implementation.</p>
         <p className="mb-2">Re-arrange code for better organization.</p>
+        <p className="mb-2">Add favicon.</p>
+        <p className="mb-2">Add expansion table</p>
       </ChangelogEntry>
       <ChangelogEntry title="2022-11-19">
         <p className="mb-2">Makes slightly more mobile friendly.</p>
