@@ -7,7 +7,7 @@ const Apprentice = ({ thickBorders }) =>
   <Box className="apprentice mb-1" thickBorders={thickBorders}>
     <div className="title">
       <span className="mr-4">Apprentice</span>
-      <Stat stat="Wounds" />
+      <Stat stat="Wounds" thickBorders={thickBorders} />
     </div>
     <div><EntryLine thickBorders={thickBorders}>Name</EntryLine></div>
     <StatLine thickBorders={thickBorders} />

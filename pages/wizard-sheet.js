@@ -7,22 +7,18 @@ import {
 } from '../lib/utils'
 import { EXPANSION_BLOOD_LEGACY } from '../lib/constants'
 
-import Apprentice from '../components/Apprentice'
-import Box from '../components/Box'
-import Captain from '../components/Captain'
-import Config from '../components/Config'
-import ExperienceChecks from '../components/ExperienceChecks'
-import Notes from '../components/Notes'
+import Apprentice from '../components/wizardSheet/Apprentice'
+import Box from '../components/wizardSheet/Box'
+import Captain from '../components/wizardSheet/Captain'
+import Config from '../components/wizardSheet/Config'
+import ExperienceChecks from '../components/wizardSheet/ExperienceChecks'
+import Notes from '../components/wizardSheet/Notes'
 import PageBreak from '../components/PageBreak'
-import School from '../components/School'
-import SecondInCommand from '../components/SecondInCommand'
-import Soldier from '../components/Soldier'
-import Wizard from '../components/Wizard'
+import School from '../components/wizardSheet/School'
+import SecondInCommand from '../components/wizardSheet/SecondInCommand'
+import Soldier from '../components/wizardSheet/Soldier'
+import Wizard from '../components/wizardSheet/Wizard'
 import { useExpansion, useExpansionContext } from "../context/expansions"
-
-const showAboutDialog = () => {
-  document.getElementById('about-dialog').showModal()
-}
 
 const WizardSheet = () => {
   const { expansions } = useExpansionContext()

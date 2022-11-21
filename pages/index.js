@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import ChangelogEntry from '../components/ChangelogEntry'
+
 const HomePage = () =>
   <div className="flex justify-center flex-col">
     <div className="grid grid-cols-2 gap-2 mx-auto">
@@ -96,14 +98,25 @@ const HomePage = () =>
 
     <h3 className="text-2xl mt-3">Changelog</h3>
 
-    <h4 className="text-xl mt-3">2022-11-06</h4>
+    <div>
+      <ChangelogEntry title="2022-11-21">
+        <p className="mb-2">Finish spell card implementation.</p>
+        <p className="mb-2">Re-arrange code for better organization.</p>
+      </ChangelogEntry>
+      <ChangelogEntry title="2022-11-19">
+        <p className="mb-2">Makes slightly more mobile friendly.</p>
+        <p className="mb-2">Sets up for school adjustment card.</p>
+      </ChangelogEntry>
 
-    <p className="mb-2">Adds Spell Cards.</p>
-    <p className="mb-2">Makes expansions app-wide.</p>
+      <ChangelogEntry title="2022-11-06">
+        <p className="mb-2">Adds Spell Cards.</p>
+        <p className="mb-2">Makes expansions app-wide.</p>
+      </ChangelogEntry>
 
-    <h4 className="text-xl mt-3">2022-10-27</h4>
-
-    <p className="mb-2">Initial release</p>
+      <ChangelogEntry title="2022-10-27">
+        <p className="mb-2">Initial release</p>
+      </ChangelogEntry>
+    </div>
   </div>
 
 export default HomePage

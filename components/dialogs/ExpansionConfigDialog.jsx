@@ -12,7 +12,7 @@ import {
   useExpansionContext,
 } from "../../context/expansions"
 import { EXPANSION_BLOOD_LEGACY } from "../../lib/constants"
-import { FormRow } from '../Config'
+import FormRow from '../FormRow'
 
 export const ID = 'expansion-config-dialog'
 
@@ -52,8 +52,8 @@ const ExpansionConfigDialog = () => {
 
   return <dialog
     id={ID}
-    className="print:hidden border-2 border-solid border-black rounded-md"
-    style={{ maxWidth: '50%' }}
+    className="max-w-xs md:max-w-lg print:hidden border-2 border-solid border-black rounded-md"
+    // style={{ maxWidth: '50%' }}
   >
     <div className="flex justify-between items-center">
       <h2 className="text-3xl mr-10">Expansions</h2>
@@ -61,7 +61,7 @@ const ExpansionConfigDialog = () => {
         className="border-2 border-black border-solid rounded-md p-1 bg-gray-200"
         type="reset"
         onClick={closeDialog}
-      >Close Window</button>
+      >Close</button>
     </div>
 
     <p className="mb-2">

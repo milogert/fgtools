@@ -15,7 +15,19 @@ const Soldier = ({ thickBorders }) =>
         { 'border': !thickBorders, 'border-2': thickBorders }
       )} />
       <EntryLine thickBorders={thickBorders}>Name</EntryLine>
-      <EntryLine thickBorders={thickBorders}>Type</EntryLine>
+      <EntryLine thickBorders={thickBorders}>
+        <div className="flex justify-between items-center">
+          <span>Type</span>
+
+          <div className="flex justify-between items-center">
+            <span className="text-sm mr-1">Specialist</span>
+            <div className={classNames(
+              "h-3 w-3 border-black",
+              { 'border': !thickBorders, 'border-2': thickBorders }
+            )} />
+          </div>
+        </div>
+      </EntryLine>
     </div>
     <StatLine thickBorders={thickBorders} />
     <div className="soldier-bottom flex items-center">

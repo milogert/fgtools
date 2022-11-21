@@ -1,5 +1,6 @@
 import '../styles/base.scss'
 
+import React, {useState} from 'react'
 import { ExpansionProvider } from '../context/expansions'
 import ExpansionConfigDialog, {
   showDialog
@@ -14,9 +15,9 @@ const HEADER_LINKS = [
   { href: '/spell-cards', label: 'Spell Cards' },
 ]
 
-// This default export is required in a new `pages/_app.js` file.
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const linkClassName = href =>
     classNames('underline text-blue-500', {
@@ -25,12 +26,21 @@ const App = ({ Component, pageProps }) => {
 
   return <ExpansionProvider>
     <div>
-      <nav className="print:hidden flex items-center">
-        <h1 className="text-4xl my-4">Frostgrave Tools</h1>
-        <div className="flex justify-between items-center flex-grow">
-          <ol className="mx-4 flex items-center">
+      <nav className="print:hidden flex md:items-center mt-4 flex-col md:flex-row">
+        <div className="flex justify-between items-center md:mr-4">
+          <h1 className="text-4xl flex-shrink-0">❄️🪦Tools</h1>
+          <button
+            className="md:hidden border-2 border-black border-solid rounded-md p-1 bg-gray-200 h-10"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            Menu {!menuOpen ? '⬇️' : '⬆️'}
+          </button>
+        </div>
+
+        <div className={`${menuOpen ? 'flex' : 'hidden md:flex'} justify-between md:items-center flex-grow flex-col md:flex-row`}>
+          <ol className="flex md:items-center flex-col md:flex-row">
             {HEADER_LINKS.map(({ href, label }) =>
-              <li key={label} className="mr-2 last:mr-0">
+              <li key={label} className="mr-2 last:mr-0 my-1 md:my-auto">
                 <Link href={href}>
                   <a
                     className={linkClassName(href)}
@@ -39,25 +49,27 @@ const App = ({ Component, pageProps }) => {
               </li>
             )}
           </ol>
-          <div className="flex items-center">
+          <div className="flex md:items-center flex-col md:flex-row">
             <button
               onClick={showDialog}
               type="button"
-              className="mr-2 border-2 border-black border-solid rounded-md p-1 bg-gray-200 h-10"
+              className="mr-2 border-2 border-black border-solid rounded-md p-1 bg-gray-200 h-10 max-w-fit"
             >Expansions</button>
-            <div>
-              Find a bug?&nbsp;
+            <div className="my-1 md:my-auto">
               <a
                 className="underline text-blue-500"
                 href="https://github.com/milogert/frostgrave-sheet/issues/new"
                 target="_blank"
                 rel="noreferrer"
-              >File it here!</a>
+              >Find a bug?</a>
             </div>
           </div>
         </div>
       </nav>
-      <Component {...pageProps} />
+
+      <div className="mt-4">
+        <Component {...pageProps} />
+      </div>
 
       <ExpansionConfigDialog />
     </div>

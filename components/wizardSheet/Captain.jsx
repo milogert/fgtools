@@ -5,7 +5,7 @@ import StatLine from './StatLine'
 import Stats from './Stats'
 
 const Captain = ({ thickBorders }) =>
-  <Box className="captain mb-1" thickBorders={thickBorders}>
+  <Box className="captain" thickBorders={thickBorders}>
     <div className="title">
       <span className="mr-4">Captain</span>
       <Stat stat="Wounds" thickBorders={thickBorders} />

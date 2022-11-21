@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 
-import { getRange } from '../lib/utils'
+import { getRange } from '../../lib/utils'
 import Box from './Box'
 
 const Spell = ({ name, details }) =>

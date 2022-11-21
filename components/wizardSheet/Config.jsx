@@ -1,23 +1,11 @@
-export const FormRow = ({
-  className,
-  inputProps,
-  name,
-  label,
-}) =>
-  <div className={`form-row flex justify-between items-center h-9  ${className || ''}`}>
-    <label htmlFor={name} className="flex flex-grow" aria-hidden="true">
-      {label}
-      <div className="form-spacer flex-grow mx-3 border-b-2 border-dotted border-black" />
-    </label>
-    <input id={name} {...inputProps} />
-  </div>
+import FormRow from "../FormRow"
+import PrintWarning from "../PrintWarning"
 
 const Config = props => {
   const {
     allowCustomSchools,
     customSchoolsText,
     expChecks,
-    expansions,
     hasCaptain,
     showSpellDetails,
     showPreview,
@@ -105,12 +93,7 @@ const Config = props => {
       </div>
     }
 
-    {showPreview.get &&
-      <div className="text-3xl text-center border-black border-b-4 mt-4">
-        <div>Everything above this line will not be printed</div>
-        <div>Below is a preview of your wizard sheet</div>
-      </div>
-    }
+    {showPreview.get && <PrintWarning what="wizard sheet" />}
   </div>
 }
 
