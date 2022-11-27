@@ -1,27 +1,20 @@
-import { useEffect, useMemo, useState } from "react"
-
-import { getSchools } from '../lib/utils'
-import SpellCard from '../components/spellCards/SpellCard'
-import { addIndex, flatten, keys, map, pipe, sort } from "ramda"
-import { useExpansionContext } from "../context/expansions"
-import PageBreak from "../components/PageBreak"
-import FormRow from "../components/FormRow"
-import AlignmentReferenceCard from "../components/spellCards/AlignmentReferenceCard"
+import React, { useEffect, useMemo, useState } from "react"
+import { compose, mergeAll, values } from "ramda"
 import { useRouter } from "next/router"
-import PrintWarning from "../components/PrintWarning"
-import Head from "next/head"
 
-const insertBreaks = (spell, idx) =>
-  ([
-    spell,
-    ...((idx + 1) % 8 === 0 ? [ 'break' ] : []),
-  ])
+import FormRow from "../components/FormRow"
+import Head from "next/head"
+import PrintWarning from "../components/PrintWarning"
+import SpellCardList from "../components/spellCards/SpellCardList"
+import { ALL_SCHOOLS } from "../lib/constants"
+import { getSchools } from '../lib/utils'
+import { useExpansionContext } from "../context/expansions"
 
 const SpellCards = () => {
   const { expansions } = useExpansionContext()
   const [ allSchools, setAllSchools ] = useState(getSchools(expansions))
   const router = useRouter()
-  const { school } = router.query
+  const { school: selectedSchool } = router.query
 
   // Config.
   const [ includeAlignmentCard, setIncludeAlignmentCard ] = useState(false)
@@ -31,19 +24,12 @@ const SpellCards = () => {
     setAllSchools(getSchools(expansions))
   }, [ expansions ])
 
-  const spells =
-    useMemo(() => school ? allSchools[school] : {}, [ allSchools, school ])
-
-  const spellsWithPageBreaks = useMemo(
-    () =>
-      pipe(
-        keys,
-        sort((l, r) => l > r),
-        addIndex(map)(insertBreaks),
-        flatten,
-      )(spells),
-    [ spells ]
-  )
+  const spells = useMemo(() => {
+    if (selectedSchool === ALL_SCHOOLS) {
+      return compose(mergeAll, values)(allSchools)
+    }
+    return selectedSchool ? allSchools[selectedSchool] : {}
+  }, [ allSchools, selectedSchool ])
 
   return <div>
     <Head>
@@ -63,10 +49,11 @@ const SpellCards = () => {
           </label>
           <select
             id="schoolSelect"
-            value={school || ''}
+            value={selectedSchool || ''}
             onChange={e => router.push({ query: { school: e.target.value } })}
           >
             <option value="">Select a school</option>
+            <option value={ALL_SCHOOLS}>All Schools</option>
             {Object.keys(allSchools).sort().map(school =>
               <option key={school} value={school}>{school}</option>
             )}
@@ -113,32 +100,13 @@ const SpellCards = () => {
 
     <div className="mx-auto">
       <div className="flex justify-center align-center flex-wrap">
-        {includeAlignmentCard && school &&
-          <AlignmentReferenceCard schoolName={school} />
-        }
-        {school
-          ? spellsWithPageBreaks.map((spellName, idx) => {
-              if (spellName === 'break') {
-                return <PageBreak />
-              }
-
-              const {
-                castingNumber,
-                fullText,
-                range,
-                text,
-              } = spells[spellName]
-
-              return <SpellCard
-                castingNumber={castingNumber}
-                fullText={forceFullText && fullText}
-                key={`${spellName}-${idx}`}
-                range={range}
-                school={school}
-                spellName={spellName}
-                text={text}
-              />
-            })
+        {selectedSchool
+          ? <SpellCardList
+            forceFullText={forceFullText}
+            includeAlignmentCard={includeAlignmentCard}
+            selectedSchool={selectedSchool}
+            spells={spells}
+          />
           : <div>Pick a school above to see the spell cards.</div>
         }
       </div>

@@ -1,15 +1,15 @@
 import Box from './Box'
 import EntryLine from './EntryLine'
-import Stat from './Stat'
 import StatLine from './StatLine'
 
 const SecondInCommand = ({ thickBorders }) =>
   <Box className="second-in-command mb-1" thickBorders={thickBorders}>
     <div className="title">
       <span className="mr-4">2nd In Command</span>
-      <Stat stat="Wounds" thickBorders={thickBorders} />
+      <div className="flex-grow text-lg">
+        <EntryLine thickBorders={thickBorders}>Name</EntryLine>
+      </div>
     </div>
-    <div><EntryLine thickBorders={thickBorders}>Name</EntryLine></div>
     <StatLine thickBorders={thickBorders} />
     <div className="h-24">
       Items

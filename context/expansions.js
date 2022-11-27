@@ -4,6 +4,7 @@ import {
   EXPANSION_BLOOD_LEGACY,
   EXPANSION_FROSTGRAVE_FOLIO,
   EXPANSION_INTO_THE_BREEDING_PITS,
+  EXPANSION_THAW_OF_THE_LICH_LORD,
 } from "../lib/constants"
 
 const ExpansionContext = createContext()
@@ -11,17 +12,22 @@ const ExpansionContext = createContext()
 export const ExpansionProvider = ({ children }) => {
   const [ expansions, setExpansions ] = useState([
     {
-      label: "Into the Breeding Pits",
+      label: 'Thaw of the Lich Lord',
+      enabled: false,
+      key: EXPANSION_THAW_OF_THE_LICH_LORD,
+    },
+    {
+      label: 'Into the Breeding Pits',
       enabled: false,
       key: EXPANSION_INTO_THE_BREEDING_PITS,
     },
     {
-      label: "Frostgrave Folio",
+      label: 'Frostgrave Folio',
       enabled: false,
       key: EXPANSION_FROSTGRAVE_FOLIO,
     },
     {
-      label: "Blood Legacy",
+      label: 'Blood Legacy',
       enabled: false,
       vampireWizard: false,
       key: EXPANSION_BLOOD_LEGACY,

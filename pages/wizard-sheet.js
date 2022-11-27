@@ -23,7 +23,7 @@ import Head from 'next/head'
 
 const WizardSheet = () => {
   const { expansions } = useExpansionContext()
-  const [ allSchools, setAllSchools ] = useState(getSchools(expansions))
+  const [ allSchools, setAllSchools ] = useState(getSchools(expansions, true))
   const [ allowCustomSchools, setAllowCustomSchools ] = useState(false)
   const [ customSchoolsText, setCustomSchoolsText ] = useState(null)
   const [ expChecks, setExpChecks ] = useState(true)
@@ -36,7 +36,7 @@ const WizardSheet = () => {
 
   useEffect(() => {
     setAllSchools({
-      ...getSchools(expansions),
+      ...getSchools(expansions, true),
       ...(allowCustomSchools ? parseCustomSchools(customSchoolsText) : {}),
     })
   }, [ allowCustomSchools, customSchoolsText, expansions ])
