@@ -5,7 +5,6 @@ import {
   getSchools,
   parseCustomSchools,
 } from '../lib/utils'
-import { EXPANSION_BLOOD_LEGACY } from '../lib/constants'
 
 import Apprentice from '../components/wizardSheet/Apprentice'
 import Box from '../components/wizardSheet/Box'
@@ -18,7 +17,7 @@ import School from '../components/wizardSheet/School'
 import SecondInCommand from '../components/wizardSheet/SecondInCommand'
 import Soldier from '../components/wizardSheet/Soldier'
 import Wizard from '../components/wizardSheet/Wizard'
-import { useExpansion, useExpansionContext } from "../context/expansions"
+import { useExpansionContext } from "../context/expansions"
 import Head from 'next/head'
 
 const WizardSheet = () => {
@@ -32,7 +31,7 @@ const WizardSheet = () => {
   const [ showSpellDetails, setShowSpellDetails ] = useState(true)
   const [ soldierCount, setSoldierCount ] = useState(9)
   const [ thickBorders, setThickBorders ] = useState(false)
-  const bloodLegacy = useExpansion(EXPANSION_BLOOD_LEGACY)
+  const [ wizardVampire, setWizardVampire ] = useState(false)
 
   useEffect(() => {
     setAllSchools({
@@ -62,13 +61,14 @@ const WizardSheet = () => {
       showPreview={{ get: showPreview, set: setShowPreview }}
       soldierCount={{ get: soldierCount, set: setSoldierCount }}
       thickBorders={{ get: thickBorders, set: setThickBorders }}
+      wizardVampire={{ get: wizardVampire, set: setWizardVampire }}
     />
 
     {showPreview && <>
       <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
         <div className="figures-main col-span-5 flex flex-col">
           <Wizard thickBorders={thickBorders} />
-          { bloodLegacy.enabled
+          { wizardVampire
             ? <SecondInCommand thickBorders={thickBorders} />
             : <Apprentice thickBorders={thickBorders} />
           }

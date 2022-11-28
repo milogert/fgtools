@@ -38,17 +38,6 @@ const ExpansionConfigDialog = () => {
 
   const bloodLegacy = useExpansion(EXPANSION_BLOOD_LEGACY)
 
-  useEffect(() => {
-    if (!bloodLegacy.enabled && bloodLegacy.vampireWizard) {
-      onOptionChange(EXPANSION_BLOOD_LEGACY, 'vampireWizard')
-    }
-  }, [
-      bloodLegacy.enabled,
-      bloodLegacy.vampireWizard,
-      onOptionChange,
-    ]
-  )
-
   return <dialog
     id={ID}
     className="max-w-xs md:max-w-lg print:hidden border-2 border-solid border-black rounded-md"
@@ -78,18 +67,6 @@ const ExpansionConfigDialog = () => {
             checked: expansion.enabled,
           }}
         />
-        {expansion.key === EXPANSION_BLOOD_LEGACY && expansion.enabled &&
-          <FormRow
-            name="vampireWizard"
-            label="Make wizard a vampire?"
-            className="expansion-option ml-4"
-            inputProps={{
-              type: "checkbox",
-              onChange: () => onOptionChange(expansion.key, 'vampireWizard'),
-              checked: expansion.vampireWizard,
-            }}
-          />
-        }
       </div>
     )}
 

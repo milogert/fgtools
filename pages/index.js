@@ -107,6 +107,11 @@ const HomePage = () =>
     <h3 className="text-2xl mt-3">Changelog</h3>
 
     <div>
+      <ChangelogEntry title="2022-11-27">
+        <li>Update Vampire spells to include text and casting numbers.</li>
+        <li>Added Fire Giant school of magic.</li>
+      </ChangelogEntry>
+
       <ChangelogEntry title="2022-11-26">
         <li>Add Thaw of the Lich Lord spells.</li>
         <li>Add an All Schools spell card selection.</li>

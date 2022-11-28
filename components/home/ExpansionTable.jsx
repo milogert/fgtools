@@ -9,7 +9,7 @@ const expansionData = [
   { name: 'Wizards\' Conclave',     released: true, owned: true,  status: true },
   { name: 'Perilous Dark',          released: true, owned: true,  status: true },
   { name: 'The Red King',           released: true, owned: true,  status: true },
-  { name: 'Blood Legacy',           released: true, owned: false, status: 'I have spell names but no details.' },
+  { name: 'Blood Legacy',           released: true, owned: true,  status: 'Shipping to me...' },
   { name: 'Fireheart',              released: true, owned: false, status: false },
   { name: 'The Wildwoods',          released: 2023, owned: false, status: false },
 ]

@@ -1,3 +1,6 @@
+import { useEffect } from "react"
+import { useExpansion, useExpansionContext } from "../../context/expansions"
+import { EXPANSION_BLOOD_LEGACY } from "../../lib/constants"
 import FormRow from "../FormRow"
 import PrintWarning from "../PrintWarning"
 
@@ -11,7 +14,16 @@ const Config = props => {
     showPreview,
     soldierCount,
     thickBorders,
+    wizardVampire,
   } = props
+
+  const { enabled: bloodLegacyEnabled } = useExpansion(EXPANSION_BLOOD_LEGACY)
+
+  useEffect(() => {
+    if (!bloodLegacyEnabled) {
+      wizardVampire.set(false)
+    }
+  }, [ bloodLegacyEnabled, wizardVampire ])
 
   return <div className="config mb-4 print:hidden">
     <h2 className="text-2xl mt-4">General Options</h2>
@@ -70,6 +82,18 @@ const Config = props => {
         checked: showSpellDetails.get,
       }}
     />
+    {bloodLegacyEnabled &&
+      <FormRow
+        name="wizardVampire"
+        label="Make Wizard a Vampire"
+        sublabel="Blood Legacy option"
+        inputProps={{
+          type: "checkbox",
+          onChange: () => wizardVampire.set(!wizardVampire.get),
+          checked: wizardVampire.get,
+        }}
+      />
+    }
 
     <h2 className="text-2xl mt-4">Custom</h2>
     <FormRow
