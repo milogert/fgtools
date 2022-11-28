@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import ChangelogEntry from '../components/ChangelogEntry'
+import Changelog from '../components/home/Changelog'
 import ExpansionTable from '../components/home/ExpansionTable'
+import Todos from '../components/home/Todos'
 
 const HomePage = () =>
   <div className="flex justify-center flex-col">
@@ -104,43 +105,11 @@ const HomePage = () =>
       I used NextJS and host on Vercel.
     </p>
 
+    <h3 className="text-2xl mt-3">Todos</h3>
+    <Todos />
+
     <h3 className="text-2xl mt-3">Changelog</h3>
-
-    <div>
-      <ChangelogEntry title="2022-11-27">
-        <li>Update Vampire spells to include text and casting numbers.</li>
-        <li>Added Fire Giant school of magic.</li>
-      </ChangelogEntry>
-
-      <ChangelogEntry title="2022-11-26">
-        <li>Add Thaw of the Lich Lord spells.</li>
-        <li>Add an All Schools spell card selection.</li>
-        <li>Fix expansion table.</li>
-        <li>Wizard sheet excludes unlearnable schools.</li>
-      </ChangelogEntry>
-
-      <ChangelogEntry title="2022-11-21">
-        <li>Finish spell card implementation.</li>
-        <li>Re-arrange code for better organization.</li>
-        <li>Add favicon.</li>
-        <li>Add expansion table</li>
-        <li>Finish implementing stray things.</li>
-      </ChangelogEntry>
-
-      <ChangelogEntry title="2022-11-19">
-        <li>Makes slightly more mobile friendly.</li>
-        <li>Sets up for school adjustment card.</li>
-      </ChangelogEntry>
-
-      <ChangelogEntry title="2022-11-06">
-        <li>Adds Spell Cards.</li>
-        <li>Makes expansions app-wide.</li>
-      </ChangelogEntry>
-
-      <ChangelogEntry title="2022-10-27">
-        <li>Initial release</li>
-      </ChangelogEntry>
-    </div>
+    <Changelog />
   </div>
 
 export default HomePage

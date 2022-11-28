@@ -65,7 +65,7 @@ const WizardSheet = () => {
     />
 
     {showPreview && <>
-      <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
+      <div className="figures printing grid grid-cols-12 gap-1">
         <div className="figures-main col-span-5 flex flex-col">
           <Wizard thickBorders={thickBorders} />
           { wizardVampire
@@ -97,7 +97,7 @@ const WizardSheet = () => {
       <PageBreak />
 
       { soldierCount > 9 && <>
-        <div className="figures printing print:mx-auto print:mt-2 grid grid-cols-12 gap-1">
+        <div className="figures printing grid grid-cols-12 gap-1">
           <div className="figures-notes col-span-5 flex flex-col">
             <div className={classnames(
               'box flex-grow',
@@ -119,7 +119,7 @@ const WizardSheet = () => {
       </>}
 
       {schoolCount <= 12 &&
-        <div className="flex flex-col printing print:mx-auto print:mt-2">
+        <div className="flex flex-col printing">
           <div className="schools-overflow grid grid-cols-3 gap-1">
             {schools
               .map(name => <School
@@ -146,7 +146,7 @@ const WizardSheet = () => {
       }
 
       {schoolCount > 12 && <>
-        <div className="flex flex-col printing print:mx-auto print:mt-2o">
+        <div className="flex flex-col printing">
           <div className="schools-overflow grid grid-cols-3 gap-1">
             {schools
               .slice(0, 15)
@@ -172,7 +172,7 @@ const WizardSheet = () => {
 
         <PageBreak />
 
-        <div className="flex flex-col printing print:m-auto">
+        <div className="flex flex-col printing">
           <div className="schools-overflow grid grid-cols-3 gap-1">
             {schools
               .slice(15, schoolCount)

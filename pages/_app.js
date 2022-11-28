@@ -26,7 +26,7 @@ const App = ({ Component, pageProps }) => {
 
   return <ExpansionProvider>
     <div>
-      <nav className="print:hidden flex md:items-center mt-4 flex-col md:flex-row">
+      <nav className="print:hidden flex md:items-center py-4 flex-col md:flex-row">
         <div className="flex justify-between items-center md:mr-4">
           <h1 className="text-4xl flex-shrink-0">❄️🪦Tools</h1>
           <button
@@ -67,9 +67,7 @@ const App = ({ Component, pageProps }) => {
         </div>
       </nav>
 
-      <div className="mt-4">
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
 
       <ExpansionConfigDialog />
     </div>
