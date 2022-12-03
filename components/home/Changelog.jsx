@@ -2,6 +2,12 @@ import ChangelogEntry from '../ChangelogEntry'
 
 const changelog = [
   {
+    date: '2022-12-03',
+    changes: [
+      'Update school information for Blood Legacy.',
+    ]
+  },
+  {
     date: '2022-12-02',
     changes: [
       'Save expansion state to browser.',

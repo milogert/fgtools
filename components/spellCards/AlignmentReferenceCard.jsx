@@ -8,15 +8,25 @@ import {
   flip,
   ascend,
   identity,
+  defaultTo,
+  prop,
 } from 'ramda'
 import { useExpansionContext } from "../../context/expansions"
 
 const includedIn = flip(includes)
 const ascendingIdent = ascend(identity)
-const neutralSchools = specificSpells => pipe(
+
+const isSchoolUnlearnable = pipe(
+  prop(__, spellData),
+  prop('unteachable'),
+  defaultTo(false),
+)
+
+const neutralSchools = specificSchools => pipe(
   keys,
-  reject(includedIn(specificSpells)),
+  reject(includedIn(specificSchools)),
   sort(ascendingIdent),
+  reject(isSchoolUnlearnable),
 )(spellData)
 
 const AlignmentReferenceCard = ({ schoolName }) => {
@@ -31,18 +41,25 @@ const AlignmentReferenceCard = ({ schoolName }) => {
 
   const {
     aligned,
-    opposed,
+    antithetical = [],
+    opposed = [],
   } = schoolAdjustment
 
-  const specificSpells = [ schoolName, ...aligned, ...opposed ]
-  const neutral = neutralSchools(specificSpells)
+  const specificSchools = [
+    schoolName,
+    ...aligned,
+    ...antithetical,
+    ...opposed,
+  ]
+  const neutral = neutralSchools(specificSchools)
 
-  const alignments = {
-    0: [ schoolName ],
-    2: intersection(aligned, schoolKeys),
-    4: intersection(neutral, schoolKeys),
-    6: intersection(opposed, schoolKeys),
-  }
+  const alignments = [
+    { schools: [ schoolName ], castingAdjustment: 0 },
+    { schools: intersection(aligned, schoolKeys), castingAdjustment: 2 },
+    { schools: intersection(neutral, schoolKeys), castingAdjustment: 4 },
+    { schools: intersection(opposed, schoolKeys), castingAdjustment: 6 },
+    { schools: intersection(antithetical, schoolKeys), antithetical: true },
+  ]
 
   return <div className="inline-block">
     <div
@@ -53,18 +70,23 @@ const AlignmentReferenceCard = ({ schoolName }) => {
       </div>
 
       <div className="flex flex-row justify-around">
-        {Object.keys(alignments).map(key =>
-          <div key={key} className="flex flex-col p-1">
-            <div className="flex text-lg my-1">
-              <span className="text-md">+</span>
-              <span className="text-3xl">{key}</span>
-            </div>
-            {alignments[key].map(otherSchool =>
+        {alignments.map(({ schools, castingAdjustment, antithetical = false }, idx) =>
+          schools.length > 0
+            ? <div key={idx} className="flex flex-col p-1">
+            {antithetical
+              ? <div className="flex text-3xl my-1 justify-center"><span>-</span></div>
+              : <div className="flex text-lg my-1">
+                <span className="text-md">+</span>
+                <span className="text-3xl">{castingAdjustment}</span>
+              </div>
+            }
+            {schools.map(otherSchool =>
               <div key={otherSchool} className="my-1 w-8 h-8 relative">
                 <Image src={getSchoolIcon(otherSchool)} alt={otherSchool} layout="fill" />
               </div>
             )}
           </div>
+          : null
         )}
       </div>
     </div>

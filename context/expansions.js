@@ -35,12 +35,7 @@ const DEFAULT_CONFIG = [
 ]
 
 const getExpansionState = () => {
-  // if (typeof window === "undefined") {
-  //   console.log('Getting Expansions: window is still undefined')
-  //   return DEFAULT_CONFIG
-  // }
   const storedExpansions = JSON.parse(localStorage.getItem(STORAGE_EXPANSION_KEY)) ?? DEFAULT_CONFIG
-  console.log('storedExpansions', storedExpansions)
   const fullExpansionList = pipe(
     reject(pipe(prop('key'), doesExpansionKeyExist)),
     concat(storedExpansions),
@@ -86,6 +81,5 @@ export const useExpansionContext = () => useContext(ExpansionContext)
 
 export const useExpansion = expansionKey => {
   const { expansions } = useExpansionContext()
-  console.log('EXP', JSON.stringify(expansions))
   return find(propEq('key', expansionKey), expansions)
 }
