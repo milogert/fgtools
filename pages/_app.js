@@ -43,6 +43,7 @@ const App = ({ Component, pageProps }) => {
               <li key={label} className="mr-2 last:mr-0 my-1 md:my-auto">
                 <Link href={href}>
                   <a
+                    onClick={() => setMenuOpen(false)}
                     className={linkClassName(href)}
                   >{label}</a>
                 </Link>
@@ -73,6 +74,5 @@ const App = ({ Component, pageProps }) => {
     </div>
   </ExpansionProvider>
 }
-
 
 export default App

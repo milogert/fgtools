@@ -2,6 +2,13 @@ import ChangelogEntry from '../ChangelogEntry'
 
 const changelog = [
   {
+    date: '2022-12-02',
+    changes: [
+      'Save expansion state to browser.',
+      'When navigating to other pages the menu closes.',
+    ]
+  },
+  {
     date: '2022-11-28',
     changes: [
       'Corrected a bunch of spelling errors.',
@@ -9,7 +16,6 @@ const changelog = [
       'Added gold piece box in the treasury.',
     ]
   },
-
   {
     date: '2022-11-27',
     changes: [
@@ -17,7 +23,6 @@ const changelog = [
       'Added Fire Giant school of magic.',
     ]
   },
-
   {
     date: '2022-11-26',
     changes: [
@@ -27,7 +32,6 @@ const changelog = [
       'Wizard sheet excludes unlearnable schools.',
     ]
   },
-
   {
     date: '2022-11-21',
     changes: [
@@ -38,7 +42,6 @@ const changelog = [
       'Finish implementing stray things.',
     ]
   },
-
   {
     date: '2022-11-19',
     changes: [
@@ -46,7 +49,6 @@ const changelog = [
       'Sets up for school adjustment card.',
     ]
   },
-
   {
     date: '2022-11-06',
     changes: [
@@ -54,7 +56,6 @@ const changelog = [
       'Makes expansions app-wide.',
     ]
   },
-
   {
     date: '2022-10-27',
     changes: [

@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useExpansion, useExpansionContext } from "../../context/expansions"
+import { useExpansion } from "../../context/expansions"
 import { EXPANSION_BLOOD_LEGACY } from "../../lib/constants"
 import FormRow from "../FormRow"
 import PrintWarning from "../PrintWarning"
@@ -17,7 +17,7 @@ const Config = props => {
     wizardVampire,
   } = props
 
-  const { enabled: bloodLegacyEnabled } = useExpansion(EXPANSION_BLOOD_LEGACY)
+  const { enabled: bloodLegacyEnabled } = useExpansion(EXPANSION_BLOOD_LEGACY) || {}
 
   useEffect(() => {
     if (!bloodLegacyEnabled) {
