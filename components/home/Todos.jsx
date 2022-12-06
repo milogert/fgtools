@@ -1,5 +1,7 @@
 const todos = [
-  { name: 'Save expansion state to storage.', done: false },
+  { name: 'Save expansion state to storage.', done: true },
+  { name: 'Option to omit casting number on spell cards.', done: false },
+  { name: 'Option to exclude core set on spell card page to facilitate just printing expansion spells.', done: false },
 ]
 
 const Todos = () =>
